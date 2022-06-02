@@ -5,7 +5,8 @@
 @endsection
 
 @section('breadcrumbs')
-    breadcrumbs
+    {{-- resources/views/home.blade.php --}}
+{{ Breadcrumbs::render('dashboard_home') }}
 @endsection
 
 @section('content')
