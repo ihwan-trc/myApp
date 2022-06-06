@@ -16,9 +16,9 @@
             <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                    <form action="" method="GET">
+                    <form action="{{ route('categories.index') }}" method="GET">
                         <div class="input-group">
-                            <input name="keyword" type="search" class="form-control" placeholder="{{ trans('categories.form_control.input.search.placeholder') }}">
+                            <input name="keyword" type="search" class="form-control" placeholder="{{ trans('categories.form_control.input.search.placeholder') }}" value="{{ request()->get('keyword') }}">
                             <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
                                 <i class="fas fa-search"></i>
@@ -38,10 +38,22 @@
             <div class="card-body">
                 <ul class="list-group list-group-flush">
                     <!-- list category -->
-                    @include('categories._category-list', [
-                        'categories' => $categories,
-                        'count' => 0
-                    ])
+                    @if (count($categories))
+                        @include('categories._category-list', [
+                            'categories' => $categories,
+                            'count' => 0
+                        ])
+                    @else
+                        <p>
+                            <strong>
+                                @if (request()->get('keyword'))
+                                    {{ trans('categories.label.no_data.search',['keyword' => request()->get('keyword') ]) }}
+                                @else
+                                    {{ trans('categories.label.no_data.fetch') }}
+                                @endif
+                            </strong>
+                        </p>
+                    @endif
                 </ul>
             </div>
         </div>

@@ -93,5 +93,11 @@ return [
                 'error' => "Terjadi kesalahan saat menghapus kategori. :error"
             ]
         ],
+        'label' => [
+            'no_data' => [
+                'fetch' => "Data kategori belum ada",
+                'search' => "Kategori :keyword tidak ditemukan",
+            ]
+        ]
     ]
 ];

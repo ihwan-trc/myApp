@@ -93,5 +93,11 @@ return [
                 'error' => "An error occurred while deleting the category. :error"
             ]
         ],
+        'label' => [
+            'no_data' => [
+                'fetch' => "No category data yet",
+                'search' => ":keyword category not found",
+            ]
+        ]
     ]
 ];
