@@ -19,6 +19,16 @@ Breadcrumbs::for('add_category', function ($trail) {
     $trail->parent('categories');
     $trail->push('Add', route('categories.create'));
 });
+// Dashboard > Categories > edit
+Breadcrumbs::for('edit_category', function ($trail,$category) {
+    $trail->parent('categories');
+    $trail->push('Edit', route('categories.edit',['category' => $category]));
+});
+// Dashboard > Categories > edit > [title]
+Breadcrumbs::for('edit_category_title', function ($trail,$category) {
+    $trail->parent('categories',$category);
+    $trail->push($category->title, route('categories.edit',['category' => $category]));
+});
 
 // Home > Blog
 // Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {

@@ -88,7 +88,7 @@ class CategoryController extends Controller
                 $request['parent_category'] = Category::select('id','title')->find($request->parent_category);
             }
             Alert::error(trans('categories.alert.create.title'), trans('categories.alert.create.message.error',['error' => $th->getMessage()]));
-            return redirect()->back()->withInput($request->all())->withErrors($validator);
+            return redirect()->back()->withInput($request->all());
         }
     }
 
@@ -111,7 +111,7 @@ class CategoryController extends Controller
      */
     public function edit(Category $category)
     {
-        //
+        return view('categories.edit',compact('category'));
     }
 
     /**
@@ -123,7 +123,43 @@ class CategoryController extends Controller
      */
     public function update(Request $request, Category $category)
     {
-        //
+        //prose validasi data kategori
+        $validator = Validator::make($request->all(),[
+            'title' => 'required|string|max:60',
+            'slug' => 'required|string|unique:categories,slug,' . $category->id,
+            'thumbnail' => 'required',
+            'description' => 'required|string|max:240',
+        ],
+        [],
+        $this->attribut()
+    );
+
+        if($validator->fails()) {
+            if($request->has('parent_category')) {
+                $request['parent_category'] = Category::select('id','title')->find($request->parent_category);
+            }
+            return redirect()->back()->withInput($request->all())->withErrors($validator);
+        }
+
+        // proses insert data
+        try {
+            $category->update([
+                'title' => $request->title,
+                'slug' => $request->slug,
+                'thumbnail' => parse_url($request->thumbnail)['path'],
+                'description' => $request->description,
+                'parent_id' => $request->parent_category
+            ]);
+
+            Alert::success(trans('categories.alert.update.title'), trans('categories.alert.update.message.success'));
+            return redirect()->route('categories.index');
+        } catch (\Throwable $th) {
+            if($request->has('parent_category')) {
+                $request['parent_category'] = Category::select('id','title')->find($request->parent_category);
+            }
+            Alert::error(trans('categories.alert.update.title'), trans('categories.alert.update.message.error',['error' => $th->getMessage()]));
+            return redirect()->back()->withInput($request->all());
+        }
     }
 
     /**
