@@ -24,7 +24,7 @@ class CategoryController extends Controller
         }
         
         return view('categories.index', [
-            'categories' => $categories->paginate(10)->appends(['keyword' => $request->get('keyword')])
+            'categories' => $categories->paginate(5)->appends(['keyword' => $request->get('keyword')])
         ]);
     }
 
@@ -182,7 +182,7 @@ class CategoryController extends Controller
             $category->delete();
             Alert::success(
                 trans('categories.alert.delete.title'),
-                trans('categories.alert.delete.success')
+                trans('categories.alert.delete.message.success')
             );
         } catch (\Throwable $th) {
             Alert::error(

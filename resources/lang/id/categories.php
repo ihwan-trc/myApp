@@ -9,6 +9,12 @@ return [
         'edit' => 'Ubah kategori',
         'detail' => 'Detail kategori',
     ],
+    'label' => [
+        'no_data' => [
+            'fetch' => "Data kategori belum ada",
+            'search' => "Kategori :keyword tidak ditemukan",
+        ]
+    ],
     'form_control' => [
         'input' => [
             'title' => [
@@ -91,12 +97,6 @@ return [
                 'confirm' => "Yakin akan menghapus kategori :title ?",
                 'success' => "Kategori berhasil dihapus",
                 'error' => "Terjadi kesalahan saat menghapus kategori. :error"
-            ]
-        ],
-        'label' => [
-            'no_data' => [
-                'fetch' => "Data kategori belum ada",
-                'search' => "Kategori :keyword tidak ditemukan",
             ]
         ]
     ]

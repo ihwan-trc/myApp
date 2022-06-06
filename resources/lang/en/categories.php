@@ -9,6 +9,12 @@ return [
         'edit' => 'Edit category',
         'detail' => 'Detail category',
     ],
+    'label' => [
+        'no_data' => [
+            'fetch' => "No category data yet",
+            'search' => ":keyword category not found",
+        ]
+    ],
     'form_control' => [
         'input' => [
             'title' => [
@@ -91,12 +97,6 @@ return [
                 'confirm' => "Are you sure you want to delete the :title category?",
                 'success' => "Category deleted successfully.",
                 'error' => "An error occurred while deleting the category. :error"
-            ]
-        ],
-        'label' => [
-            'no_data' => [
-                'fetch' => "No category data yet",
-                'search' => ":keyword category not found",
             ]
         ]
     ]
