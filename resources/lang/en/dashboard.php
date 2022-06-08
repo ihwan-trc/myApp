@@ -10,7 +10,7 @@ return [
         'welcome' => "Welcome :name"
     ],
     'menu' => [
-        'master' => 'Haster',
+        'master' => 'Master',
         'user_permission' => 'User permission',
         'setting' => 'Setting',
     ],

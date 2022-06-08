@@ -10,7 +10,7 @@ return [
         'welcome' => "Selamat datang :name"
     ],
     'menu' => [
-        'master' => 'Haster',
+        'master' => 'Master',
         'user_permission' => 'Izin pengguna',
         'setting' => 'Pengaturan',
     ],
