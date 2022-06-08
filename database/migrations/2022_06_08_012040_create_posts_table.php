@@ -18,7 +18,7 @@ class CreatePostsTable extends Migration
             $table->string('title',60);
             $table->string('slug')->unique();
             $table->string('thumbnail');
-            $table->string('ddescription',240);
+            $table->string('description',240);
             $table->text('content');
             $table->enum('status', ['publish','draft']);
             $table->timestamps();
