@@ -73,7 +73,7 @@ class PostController extends Controller
             $post = Post::create([
                 'title' => $request->title,
                 'slug'=> $request->slug,
-                'thumbnail'=> $request->thumbnail,
+                'thumbnail'=> parse_url($request->thumbnail)['path'],
                 'description'=> $request->description,
                 'content'=> $request->content,
                 'status'=> $request->status,
