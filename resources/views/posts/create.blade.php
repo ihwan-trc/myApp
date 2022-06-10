@@ -109,7 +109,8 @@
                                 <div class="form-control overflow-auto @error ('category') is-invalid @enderror()" style="height: 886px">
                                     <!-- List category -->
                                     @include('posts._category-list',[
-                                        'categories' => $categories
+                                        'categories' => $categories,
+                                        'categoryChecked' => old('category')
                                     ])
                                     <!-- List category -->
                                 </div>

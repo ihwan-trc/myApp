@@ -20,8 +20,11 @@
                                 <div class="input-group mx-1">
                                     <label class="font-weight-bold mr-2">{{ trans('posts.form_control.select.status.label') }}</label>
                                     <select name="status" class="custom-select">
-                                    <option value="publish" selected>Publish</option>
-                                    <option value="draft">Draft</option>
+                                        @foreach ($statuses as $value => $label)
+                                            <option value="{{ $value }}" {{ $statusSelected == $value ? 'selected' : null }}>
+                                                {{ $label }}
+                                            </option>
+                                        @endforeach
                                     </select>
                                     <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">{{ trans('posts.button.apply.value') }}</button>
@@ -30,7 +33,7 @@
                             </div>
                             <div class="col">
                                 <div class="input-group mx-1">
-                                    <input name="keyword" type="search" class="form-control" placeholder="{{ trans('posts.form_control.input.search.placeholder') }}">
+                                    <input name="keyword" value="{{ request()->get('keyword') }}" type="search" class="form-control" placeholder="{{ trans('posts.form_control.input.search.placeholder') }}">
                                     <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fas fa-search"></i>
@@ -60,17 +63,19 @@
                                     </p>
                                     <div class="float-right">
                                         <!-- detail -->
-                                        <a href="{{ route('posts.show',['post' => $post]) }}" class="btn btn-sm btn-primary" role="button">
+                                        <a href="{{ route('posts.show', ['post' => $post]) }}" class="btn btn-sm btn-primary" role="button">
                                             <i class="fas fa-eye"></i>
                                         </a>
                                         <!-- edit -->
-                                        <a href="{{ route('posts.edit',['post' => $post]) }}" class="btn btn-sm btn-info" role="button">
+                                        <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-sm btn-info" role="button">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <!-- delete -->
-                                        <form class="d-inline" action="" method="POST">
+                                        <form class="d-inline" role="alert" alert-text="{{ trans('posts.alert.delete.message.confirm',['title' => $post->title]) }}"  action="{{ route('posts.destroy',['post' => $post]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">
-                                                <i class="fas fa-trash"></i>
+                                            <i class="fas fa-trash"></i>
                                             </button>
                                         </form>
                                     </div>
@@ -79,13 +84,49 @@
                         @empty
                             <p>
                                 <strong>
-                                    {{ trans('posts.label.no_data.fetch') }}
+                                    @if (request()->get('keyword'))
+                                        {{ trans('posts.label.no_data.search',['keyword'=> request()->get('keyword')]) }}
+                                    @else
+                                        {{ trans('posts.label.no_data.fetch') }}
+                                    @endif
                                 </strong>
                             </p>
                         @endforelse
                     </ul>
                 </div>
+                @if ($posts->hasPages())
+                    <div class="card-footer">
+                        {{ $posts->links('vendor.pagination.bootstrap-4') }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 @endsection
+
+@push('javascript-internal')
+    <script>
+        $(document).ready(function(){
+
+            //Event : Delete tag
+            $("form[role='alert']").submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "{{ trans('posts.alert.delete.title') }}",
+                    text: $(this).attr('alert-text'),
+                    icon: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    cancelButtonText: "{{ trans('posts.button.cancel.value') }}",
+                    reverseButtons: true,
+                    confirmButtonText: "{{ trans('posts.button.delete.value') }}",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // todo: process of deleting categories
+                        event.target.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

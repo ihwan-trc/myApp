@@ -68,18 +68,22 @@ Breadcrumbs::for('add_post', function ($trail) {
     $trail->parent('posts');
     $trail->push('Add', route('posts.create'));
 });
-
-// Dashboard > Posts > Detail
-Breadcrumbs::for('detail_post', function ($trail,$post) {
-    $trail->parent('posts',$post);
+// Dashboard > Posts > Detail > [title]
+Breadcrumbs::for('detail_post', function ($trail, $post) {
+    $trail->parent('posts');
     $trail->push('Detail', route('posts.show',['post' => $post]));
     $trail->push($post->title, route('posts.show',['post' => $post]));
 });
-
-// Dashboard > Posts > edit > [title]
-Breadcrumbs::for('edit_post_title', function ($trail,$post) {
-    $trail->parent('edit_post',$post);
+// Dashboard > Posts > Edit > [title]
+Breadcrumbs::for('edit_post', function ($trail, $post) {
+    $trail->parent('posts');
+    $trail->push('Edit', route('posts.edit',['post' => $post]));
     $trail->push($post->title, route('posts.edit',['post' => $post]));
+});
+// Dashboard > Filemanager
+Breadcrumbs::for('file_manager', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('File Manager', route('filemanager.index'));
 });
 // Home > Blog
 // Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
