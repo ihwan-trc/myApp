@@ -81,6 +81,11 @@ Breadcrumbs::for('edit_post', function ($trail, $post) {
     $trail->push('Edit', route('posts.edit',['post' => $post]));
     $trail->push($post->title, route('posts.edit',['post' => $post]));
 });
+// Dashboard > Filemanager
+Breadcrumbs::for('file_manager', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('File Manager', route('filemanager.index'));
+});
 // Home > Blog
 // Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
 //     $trail->parent('home');
