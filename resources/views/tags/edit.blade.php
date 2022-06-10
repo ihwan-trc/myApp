@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    {{ trans('tags.tile.edit') }}
+    {{ trans('tags.title.edit') }}
 @endsection
 
 @section('breadcrumbs')

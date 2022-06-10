@@ -68,6 +68,19 @@ Breadcrumbs::for('add_post', function ($trail) {
     $trail->parent('posts');
     $trail->push('Add', route('posts.create'));
 });
+
+// Dashboard > Posts > Detail > [title]
+Breadcrumbs::for('detail_post', function ($trail, $post) {
+    $trail->parent('posts');
+    $trail->push('Detail', route('posts.show',['post' => $post]));
+    $trail->push($post->title, route('posts.show',['post' => $post]));
+});
+// Dashboard > Posts > Edit > [title]
+Breadcrumbs::for('edit_post', function ($trail, $post) {
+    $trail->parent('posts');
+    $trail->push('Edit', route('posts.edit',['post' => $post]));
+    $trail->push($post->title, route('posts.edit',['post' => $post]));
+});
 // Home > Blog
 // Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
 //     $trail->parent('home');
