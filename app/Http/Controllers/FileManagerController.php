@@ -11,7 +11,7 @@ class FileManagerController extends Controller
         $typesSelected = in_array($request->type,['image','file']) ? $request->type : "image";
         return view('filemanager.index', [
             'types' => $this->types(),
-            'typesSelected' => $typesSelected
+            'typeSelected' => $typesSelected
         ]);
     }
 
