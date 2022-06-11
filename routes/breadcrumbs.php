@@ -68,7 +68,6 @@ Breadcrumbs::for('add_post', function ($trail) {
     $trail->parent('posts');
     $trail->push('Add', route('posts.create'));
 });
-
 // Dashboard > Posts > Detail > [title]
 Breadcrumbs::for('detail_post', function ($trail, $post) {
     $trail->parent('posts');
@@ -85,6 +84,23 @@ Breadcrumbs::for('edit_post', function ($trail, $post) {
 Breadcrumbs::for('file_manager', function ($trail) {
     $trail->parent('dashboard');
     $trail->push('File Manager', route('filemanager.index'));
+});
+
+// Dashboard > Roles
+Breadcrumbs::for('roles', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Roles', route('roles.index'));
+});
+// Dashboard > Roles > Add
+Breadcrumbs::for('add_role', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Add', route('roles.create'));
+});
+// Dashboard > Roles > Detail > [name]
+Breadcrumbs::for('detail_role', function ($trail, $role) {
+    $trail->parent('roles');
+    $trail->push('Detail', route('roles.show',['role' => $role]));
+    $trail->push($role->name, route('roles.show',['role' => $role]));
 });
 // Home > Blog
 // Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
