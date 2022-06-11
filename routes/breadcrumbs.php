@@ -119,6 +119,12 @@ Breadcrumbs::for('add_user', function ($trail) {
     $trail->parent('dashboard');
     $trail->push('Add', route('users.create'));
 });
+// Dashboard > Users > Edit > [title]
+Breadcrumbs::for('edit_user', function ($trail,$user) {
+    $trail->parent('users');
+    $trail->push('Edit', route('users.edit',['user' => $user]));
+    $trail->push($user->name, route('users.edit',['user' => $user]));
+});
 // Home > Blog
 // Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
 //     $trail->parent('home');

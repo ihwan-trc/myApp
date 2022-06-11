@@ -35,9 +35,9 @@
                                 {{ trans('users.form_control.select.role.label') }}
                             </label>
                             <select id="select_user_role" name="role" data-placeholder="{{ trans('users.form_control.select.role.placeholder') }}" class="custom-select w-100 @error('role') is-invalid @enderror">
-                            @if (old('role'))
-                                <option value="{{ old('role')->id }}" selected>{{ old('role')->name }}</option>
-                            @endif
+                                @if (old('role'))
+                                    <option value="{{ old('role')->id }}" selected>{{ old('role')->name }}</option>
+                                @endif
                             </select>
                             @error('role')
                                 <span class="invalid-feedback">
@@ -52,8 +52,7 @@
                             <label for="input_user_email" class="font-weight-bold">
                                 {{ trans('users.form_control.input.email.label') }}
                             </label>
-                            <input id="input_user_email" value="{{ old('email') }}" name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ trans('users.form_control.input.email.placeholder') }}"
-                                autocomplete="email" />
+                            <input id="input_user_email" value="{{ old('email') }}" name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ trans('users.form_control.input.email.placeholder') }}" autocomplete="email" />
                             @error('email')
                                 <span class="invalid-feedback">
                                     <strong>
@@ -86,7 +85,7 @@
                                 class="form-control" placeholder="{{ trans('users.form_control.input.password_confirmation.placeholder') }}" autocomplete="new-password" />
                         </div>
                         <div class="float-right">
-                        <a class="btn btn-warning px-4 mx-2" href="">
+                        <a class="btn btn-warning px-4 mx-2" href="{{ route('users.index') }}">
                             {{ trans('users.button.back.value') }}
                         </a>
                         <button type="submit" class="btn btn-primary float-right px-4">

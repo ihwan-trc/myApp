@@ -17,7 +17,7 @@
                     <div class="col-md-6">
                         <form action="" method="GET">
                             <div class="input-group">
-                                <input name="keyword" value="" type="search" class="form-control" placeholder="">
+                                <input name="keyword" value="{{ request()->get('keyword') }}" type="search" class="form-control" placeholder="{{ trans('users.form_control.input.search.placeholder') }}">
                                 <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
                                     <i class="fas fa-search"></i>
@@ -79,11 +79,13 @@
                                     </div>
                                     <div class="float-right">
                                         <!-- edit -->
-                                        <a href="" class="btn btn-sm btn-info" role="button">
+                                        <a href="{{ route('users.edit',['user' => $user->id]) }}" class="btn btn-sm btn-info" role="button">
                                             <i class="fas fa-edit"></i>
                                         </a>
                                         <!-- delete -->
-                                        <form action="" method="POST" role="alert" class="d-inline">
+                                        <form class="d-inline" role="alert" alert-text="{{ trans('users.alert.delete.message.confirm',['name' => $user->name]) }}"  action="{{ route('users.destroy',['user' => $user]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
                                             <button type="submit" class="btn btn-sm btn-danger">
                                             <i class="fas fa-trash"></i>
                                             </button>
@@ -95,16 +97,48 @@
                     @empty
                         <p>
                             <strong>
-                                {{ trans('users.label.no_data.fetch') }}
+                                @if (request()->get('keyword'))
+                                    {{ trans('users.label.no_data.search', ['keyword' => request()->get('keyword')]) }}
+                                @else
+                                    {{ trans('users.label.no_data.fetch') }}
+                                @endif
                             </strong>
                         </p>
                     @endforelse
                     </div>
                 </div>
-                <div class="card-footer">
-                    <!-- Todo:paginate -->
-                </div>
+                @if ($users->hasPages())
+                    <div class="card-footer">
+                        {{ $users->links('vendor.pagination.bootstrap-4') }}
+                    </div> 
+                @endif
             </div>
         </div>
     </div>
 @endsection
+
+@push('javascript-internal')
+    <script>
+        $(document).ready(function(){
+            //Event : Delete user
+            $("form[role='alert']").submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "{{ trans('users.alert.delete.title') }}",
+                    text: $(this).attr('alert-text'),
+                    icon: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    cancelButtonText: "{{ trans('users.button.cancel.value') }}",
+                    reverseButtons: true,
+                    confirmButtonText: "{{ trans('users.button.delete.value') }}",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // todo: process of deleting categories
+                        event.target.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush

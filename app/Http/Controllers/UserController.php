@@ -5,22 +5,29 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
-use RealRashid\SweetAlert\Facades\Alert;
 use Spatie\Permission\Models\Role;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
+use RealRashid\SweetAlert\Facades\Alert;
 
 class UserController extends Controller
 {
+    private $perPage = 15;
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+        $users = [];
+        if ($request->get('keyword')) {
+            $users = User::search($request->keyword)->paginate($this->perPage);
+        }else{
+            $users = User::paginate($this->perPage);
+        }
         return view('users.index',[
-            'users' => User::all()
+            'users' => $users->appends(['keyword' => $request->keyword])
         ]);
     }
 
@@ -54,7 +61,7 @@ class UserController extends Controller
         );
 
         if($validator->fails()) {
-            $request['role'] = Role::select('id','name')->find($request->role);
+            $request['role'] = Role::select('id', 'name')->find($request->role);
             return redirect()
                 ->back()
                 ->withInput($request->all())
@@ -68,11 +75,11 @@ class UserController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->password),
             ]);
+            $user->assignRole($request->role);
             Alert::success(
                 trans('users.alert.create.title'),
                 trans('users.alert.create.message.success')
             );
-            $user->assignRole($request->role);
             return redirect()->route('users.index');
         } catch (\Throwable $th) {
             DB::rollBack();
@@ -80,7 +87,10 @@ class UserController extends Controller
                 trans('users.alert.create.title'),
                 trans('users.alert.create.message.error',['error' => $th->getMessage()])
             );
-            return redirect()->back()->withInput($request->all())->withErrors($validator);
+            return redirect()
+                ->back()
+                ->withInput($request->all())
+                ->withErrors($validator);
         } finally {
             DB::commit();
         }
@@ -105,7 +115,10 @@ class UserController extends Controller
      */
     public function edit(User $user)
     {
-        //
+        return view('users.edit',[
+            'user' =>$user,
+            'roleSelected' => $user->roles->first()
+        ]);
     }
 
     /**
@@ -117,7 +130,43 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        //
+         //prose validasi data User
+        $validator = Validator::make($request->all(),[
+            'role' => 'required',
+            ],
+            [],
+            $this->attribut()
+        );
+
+        if($validator->fails()) {
+            $request['role'] = Role::select('id', 'name')->find($request->role);
+            return redirect()
+                ->back()
+                ->withInput($request->all())
+                ->withErrors($validator);
+        }
+
+        DB::beginTransaction();
+        try {
+            $user->syncRoles($request->role);
+            Alert::success(
+                trans('users.alert.update.title'),
+                trans('users.alert.update.message.success')
+            );
+            return redirect()->route('users.index');
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Alert::error(
+                trans('users.alert.update.title'),
+                trans('users.alert.update.message.error',['error' => $th->getMessage()])
+            );
+            return redirect()
+                ->back()
+                ->withInput($request->all())
+                ->withErrors($validator);
+        } finally {
+            DB::commit();
+        }
     }
 
     /**
@@ -128,7 +177,24 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
-        //
+        DB::beginTransaction();
+        try {
+            $user->removeRole($user->roles->first());
+            $user->delete();
+            Alert::success(
+                trans('users.alert.delete.title'),
+                trans('users.alert.delete.message.success')
+            );
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            Alert::error(
+                trans('users.alert.delete.title'),
+                trans('users.alert.delete.message.error',['error' => $th->getMessage()])
+            );
+        } finally {
+            DB::commit();
+            return redirect()->back();
+        }
     }
 
     private function attribut()
