@@ -15,9 +15,9 @@
                 <div class="card-header">
                 <div class="row">
                     <div class="col-md-6">
-                        <form action="" method="GET">
+                        <form action="{{ route('roles.index') }}" method="GET">
                             <div class="input-group">
-                                <input name="keyword" type="search" class="form-control" placeholder="Search for roles">
+                                <input name="keyword" value="{{ request()->get('keyword') }}" type="search" class="form-control" placeholder="{{ trans('roles.form_control.input.search.placeholder') }}">
                                 <div class="input-group-append">
                                 <button class="btn btn-primary" type="submit">
                                     <i class="fas fa-search"></i>
@@ -47,13 +47,15 @@
                                         <i class="fas fa-eye"></i>
                                     </a>
                                     <!-- edit -->
-                                    <a class="btn btn-sm btn-info" role="button">
+                                    <a href="{{ route('roles.edit',['role' => $role]) }}" class="btn btn-sm btn-info" role="button">
                                         <i class="fas fa-edit"></i>
                                     </a>
                                     <!-- delete -->
-                                    <form class="d-inline" action="" method="POST">
+                                    <form class="d-inline" role="alert" alert-text="{{ trans('roles.alert.delete.message.confirm',['name' => $role->name]) }}"  action="{{ route('roles.destroy',['role' => $role]) }}" method="POST">
+                                        @csrf
+                                        @method('DELETE')
                                         <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
+                                        <i class="fas fa-trash"></i>
                                         </button>
                                     </form>
                                 </div>
@@ -61,13 +63,49 @@
                         @empty
                             <p>
                                 <strong>
-                                    {{ trans('roles.label.no_data.fetch') }}
+                                    @if (request()->get('keyword'))
+                                        {{ trans('roles.label.no_data.search',['keyword' => request()->get('keyword')]) }}
+                                    @else
+                                        {{ trans('roles.label.no_data.fetch') }}
+                                    @endif
                                 </strong>
                             </p>
                         @endforelse
                     </ul>
                 </div>
+                @if ($roles->hasPages())
+                    <div class="card-footer">
+                        {{ $roles->links('vendor.pagination.bootstrap-4') }}
+                    </div>
+                @endif
             </div>
         </div>
     </div>
 @endsection
+
+@push('javascript-internal')
+    <script>
+        $(document).ready(function(){
+
+            //Event : Delete role
+            $("form[role='alert']").submit(function(event) {
+                event.preventDefault();
+                Swal.fire({
+                    title: "{{ trans('roles.alert.delete.title') }}",
+                    text: $(this).attr('alert-text'),
+                    icon: 'warning',
+                    allowOutsideClick: false,
+                    showCancelButton: true,
+                    cancelButtonText: "{{ trans('roles.button.cancel.value') }}",
+                    reverseButtons: true,
+                    confirmButtonText: "{{ trans('roles.button.delete.value') }}",
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        // todo: process of deleting categories
+                        event.target.submit();
+                    }
+                });
+            });
+        });
+    </script>
+@endpush
