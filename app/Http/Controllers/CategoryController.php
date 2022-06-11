@@ -67,10 +67,10 @@ class CategoryController extends Controller
             'slug' => 'required|string|unique:categories,slug',
             'thumbnail' => 'required',
             'description' => 'required|string|max:240',
-        ],
-        [],
-        $this->attribut()
-    );
+            ],
+            [],
+            $this->attribut()
+        );
 
         if($validator->fails()) {
             if($request->has('parent_category')) {
@@ -137,10 +137,10 @@ class CategoryController extends Controller
             'slug' => 'required|string|unique:categories,slug,' . $category->id,
             'thumbnail' => 'required',
             'description' => 'required|string|max:240',
-        ],
-        [],
-        $this->attribut()
-    );
+            ],
+            [],
+            $this->attribut()
+        );
 
         if($validator->fails()) {
             if($request->has('parent_category')) {
