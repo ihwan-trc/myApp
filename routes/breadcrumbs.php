@@ -1,5 +1,52 @@
 <?php // routes/breadcrumbs.php
 
+// ================= blog
+// Blog
+Breadcrumbs::for('blog', function ($trail) {
+    $trail->push('Blog', route('blog.home'));
+});
+// Blog > Home
+Breadcrumbs::for('blog_home', function ($trail) {
+    $trail->parent('blog');
+    $trail->push('Home', route('blog.home'));
+});
+// Blog > Post > [title]
+Breadcrumbs::for('blog_post', function ($trail, $title) {
+    $trail->parent('blog');
+    $trail->push($title, '#');
+});
+// Blog > Categories
+Breadcrumbs::for('blog_categories', function ($trail) {
+    $trail->parent('blog');
+    $trail->push('Categories', route('blog.categories'));
+});
+// Blog > Categories > [title]
+Breadcrumbs::for('blog_posts_category', function ($trail, $title) {
+    $trail->parent('blog');
+    $trail->push('Categories', route('blog.categories'));
+    $trail->push($title, '#');
+});
+// Blog > Tags
+Breadcrumbs::for('blog_tags', function ($trail) {
+    $trail->parent('blog');
+    $trail->push('Tags', route('blog.tags'));
+});
+// Blog > Tags > [title]
+Breadcrumbs::for('blog_posts_tag', function ($trail, $title) {
+    $trail->parent('blog');
+    $trail->push('Tags', route('blog.tags'));
+    $trail->push($title, '#');
+});
+// Blog > Search
+Breadcrumbs::for('blog_search', function ($trail, $keyword) {
+    $trail->parent('blog');
+    $trail->push('Search', route('blog.search'));
+    $trail->push($keyword, route('blog.search'));
+});
+
+
+
+// ================= dashboard
 // Dashboard
 Breadcrumbs::for('dashboard', function ($trail) {
     $trail->push('Dashboard', route('dashboard.index'));
@@ -125,14 +172,3 @@ Breadcrumbs::for('edit_user', function ($trail,$user) {
     $trail->push('Edit', route('users.edit',['user' => $user]));
     $trail->push($user->name, route('users.edit',['user' => $user]));
 });
-// Home > Blog
-// Breadcrumbs::for('blog', function (BreadcrumbTrail $trail) {
-//     $trail->parent('home');
-//     $trail->push('Blog', route('blog'));
-// });
-
-// Home > Blog > [Category]
-// Breadcrumbs::for('category', function (BreadcrumbTrail $trail, $category) {
-//     $trail->parent('blog');
-//     $trail->push($category->title, route('category', $category));
-// });
