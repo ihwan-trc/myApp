@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Auth;
 Route::get('/localization/{language}',[\App\Http\Controllers\LocalizationController::class, 'switch'])->name('localization.switch');
 
 Route::get('/', [\App\Http\Controllers\BlogController::class, 'home'])->name('blog.home');
+Route::get('/gheptech', [\App\Http\Controllers\GheptechController::class, 'home'])->name('gheptech.home');
+
 Route::get('/categories', [\App\Http\Controllers\BlogController::class, 'showCategories'])->name('blog.categories');
 Route::get('/tags', [\App\Http\Controllers\BlogController::class, 'showTags'])->name('blog.tags');
 Route::get('/search', [\App\Http\Controllers\BlogController::class, 'searchPosts'])->name('blog.search');
