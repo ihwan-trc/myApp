@@ -4,99 +4,121 @@
     {{ trans('users.title.create') }}
 @endsection
 
-@section('breadcrumbs')
-    {{ Breadcrumbs::render('add_user') }}
-@endsection
-
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card">
-                <div class="card-body">
-                    <form action="{{ route('users.store') }}" method="POST">
-                        @csrf
-                        <!-- name -->
-                        <div class="form-group">
-                            <label for="input_user_name" class="font-weight-bold">
-                                {{ trans('users.form_control.input.name.label') }}
-                            </label>
-                            <input id="input_user_name" value="{{ old('name') }}" name="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="{{ trans('users.form_control.input.name.placeholder') }}" />
-                            @error('name')
-                                <span class="invalid-feedback">
-                                    <strong>
-                                        {{ $message }}
-                                    </strong>
-                                </span>
-                            @enderror
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>{{ trans('users.title.create') }}</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">{{ Breadcrumbs::render('add_user') }}</li>
+                    </ol>
+                </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <form action="{{ route('users.store') }}" method="POST">
+                                @csrf
+                                <!-- name -->
+                                <div class="form-group">
+                                    <label for="input_user_name" class="font-weight-bold">
+                                        {{ trans('users.form_control.input.name.label') }}
+                                    </label>
+                                    <input id="input_user_name" value="{{ old('name') }}" name="name" type="text" class="form-control @error('name') is-invalid @enderror" placeholder="{{ trans('users.form_control.input.name.placeholder') }}" />
+                                    @error('name')
+                                        <span class="invalid-feedback">
+                                            <strong>
+                                                {{ $message }}
+                                            </strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <!-- role -->
+                                <div class="form-group">
+                                    <label for="select_user_role" class="font-weight-bold">
+                                        {{ trans('users.form_control.select.role.label') }}
+                                    </label>
+                                    <select id="select_user_role" name="role" data-placeholder="{{ trans('users.form_control.select.role.placeholder') }}" class="custom-select w-100 @error('role') is-invalid @enderror">
+                                        @if (old('role'))
+                                            <option value="{{ old('role')->id }}" selected>{{ old('role')->name }}</option>
+                                        @endif
+                                    </select>
+                                    @error('role')
+                                        <span class="invalid-feedback">
+                                            <strong>
+                                                {{ $message }}
+                                            </strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <!-- email -->
+                                <div class="form-group">
+                                    <label for="input_user_email" class="font-weight-bold">
+                                        {{ trans('users.form_control.input.email.label') }}
+                                    </label>
+                                    <input id="input_user_email" value="{{ old('email') }}" name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ trans('users.form_control.input.email.placeholder') }}" autocomplete="email" />
+                                    @error('email')
+                                        <span class="invalid-feedback">
+                                            <strong>
+                                                {{ $message }}
+                                            </strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <!-- password -->
+                                <div class="form-group">
+                                    <label for="input_user_password" class="font-weight-bold">
+                                        {{ trans('users.form_control.input.password.label') }}
+                                    </label>
+                                    <input id="input_user_password" name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ trans('users.form_control.input.password.placeholder') }}"
+                                        autocomplete="new-password" />
+                                    @error('password')
+                                        <span class="invalid-feedback">
+                                            <strong>
+                                                {{ $message }}
+                                            </strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <!-- password_confirmation -->
+                                <div class="form-group">
+                                    <label for="input_user_password_confirmation" class="font-weight-bold">
+                                        {{ trans('users.form_control.input.password_confirmation.label') }}
+                                    </label>
+                                    <input id="input_user_password_confirmation" name="password_confirmation" type="password"
+                                        class="form-control" placeholder="{{ trans('users.form_control.input.password_confirmation.placeholder') }}" autocomplete="new-password" />
+                                </div>
+                                <div class="float-right">
+                                <a class="btn btn-warning px-4 mx-2" href="{{ route('users.index') }}">
+                                    {{ trans('users.button.back.value') }}
+                                </a>
+                                <button type="submit" class="btn btn-primary float-right px-4">
+                                    {{ trans('users.button.save.value') }}
+                                </button>
+                                </div>
+                            </form>
                         </div>
-                        <!-- role -->
-                        <div class="form-group">
-                            <label for="select_user_role" class="font-weight-bold">
-                                {{ trans('users.form_control.select.role.label') }}
-                            </label>
-                            <select id="select_user_role" name="role" data-placeholder="{{ trans('users.form_control.select.role.placeholder') }}" class="custom-select w-100 @error('role') is-invalid @enderror">
-                                @if (old('role'))
-                                    <option value="{{ old('role')->id }}" selected>{{ old('role')->name }}</option>
-                                @endif
-                            </select>
-                            @error('role')
-                                <span class="invalid-feedback">
-                                    <strong>
-                                        {{ $message }}
-                                    </strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <!-- email -->
-                        <div class="form-group">
-                            <label for="input_user_email" class="font-weight-bold">
-                                {{ trans('users.form_control.input.email.label') }}
-                            </label>
-                            <input id="input_user_email" value="{{ old('email') }}" name="email" type="email" class="form-control @error('email') is-invalid @enderror" placeholder="{{ trans('users.form_control.input.email.placeholder') }}" autocomplete="email" />
-                            @error('email')
-                                <span class="invalid-feedback">
-                                    <strong>
-                                        {{ $message }}
-                                    </strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <!-- password -->
-                        <div class="form-group">
-                            <label for="input_user_password" class="font-weight-bold">
-                                {{ trans('users.form_control.input.password.label') }}
-                            </label>
-                            <input id="input_user_password" name="password" type="password" class="form-control @error('password') is-invalid @enderror" placeholder="{{ trans('users.form_control.input.password.placeholder') }}"
-                                autocomplete="new-password" />
-                            @error('password')
-                                <span class="invalid-feedback">
-                                    <strong>
-                                        {{ $message }}
-                                    </strong>
-                                </span>
-                            @enderror
-                        </div>
-                        <!-- password_confirmation -->
-                        <div class="form-group">
-                            <label for="input_user_password_confirmation" class="font-weight-bold">
-                                {{ trans('users.form_control.input.password_confirmation.label') }}
-                            </label>
-                            <input id="input_user_password_confirmation" name="password_confirmation" type="password"
-                                class="form-control" placeholder="{{ trans('users.form_control.input.password_confirmation.placeholder') }}" autocomplete="new-password" />
-                        </div>
-                        <div class="float-right">
-                        <a class="btn btn-warning px-4 mx-2" href="{{ route('users.index') }}">
-                            {{ trans('users.button.back.value') }}
-                        </a>
-                        <button type="submit" class="btn btn-primary float-right px-4">
-                            {{ trans('users.button.save.value') }}
-                        </button>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </div>
-        </div>
+
+        </section>
+        <!-- /.content -->
     </div>
+    <!-- /.content-wrapper -->
 @endsection
 
 @push('css-external')

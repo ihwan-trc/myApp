@@ -4,21 +4,35 @@
     {{ trans('posts.title.index') }}
 @endsection
 
-@section('breadcrumbs')
-    {{ Breadcrumbs::render('posts') }}
-@endsection
-
 @section('content')
-    <div class="row">
-        <div class="col-md-12">
-            <div class="card my-2">
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>{{ trans('posts.title.index') }}</h1>
+                </div>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">{{ Breadcrumbs::render('posts') }}</li>
+                    </ol>
+                </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <!-- Default box -->
+            <div class="card">
                 <div class="card-header">
                     <div class="row">
-                        <div class="col-md-6">
                         <form action="" method="GET" class="form-inline form-row">
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="input-group mx-1">
-                                    <label class="font-weight-bold mr-2">{{ trans('posts.form_control.select.status.label') }}</label>
                                     <select name="status" class="custom-select">
                                         @foreach ($statuses as $value => $label)
                                             <option value="{{ $value }}" {{ $statusSelected == $value ? 'selected' : null }}>
@@ -31,7 +45,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col">
+                            <div class="col-6">
                                 <div class="input-group mx-1">
                                     <input name="keyword" value="{{ request()->get('keyword') }}" type="search" class="form-control" placeholder="{{ trans('posts.form_control.input.search.placeholder') }}">
                                     <div class="input-group-append">
@@ -42,10 +56,9 @@
                                 </div>
                             </div>
                         </form>
-                        </div>
-                        <div class="col-md-6">
+                        <div class="card-tools">
                             @can('post_create')
-                                <a href="{{ route('posts.create') }}" class="btn btn-primary float-right" role="button">
+                                <a href="{{ route('posts.create') }}" class="btn btn-primary" role="button">
                                     {{ trans('posts.button.create.value') }}
                                     <i class="fas fa-plus-square"></i>
                                 </a>
@@ -53,63 +66,98 @@
                         </div>
                     </div>
                 </div>
-                <div class="card-body">
-                    <ul class="list-group list-group-flush">
-                        <!-- list post -->
-                        @forelse ($posts as $post)
-                            <div class="card">
-                                <div class="card-body">
-                                    <h5>{{ $post->title }}</h5>
-                                    <p>
-                                        {{ $post->description }}
-                                    </p>
-                                    <div class="float-right">
-                                        <!-- detail -->
-                                        @can('post_detail')
-                                            <a href="{{ route('posts.show', ['post' => $post]) }}" class="btn btn-sm btn-primary" role="button">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                        @endcan
-                                        <!-- edit -->
-                                        @can('post_update')
-                                            <a href="{{ route('posts.edit', ['post' => $post]) }}" class="btn btn-sm btn-info" role="button">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                        @endcan
-                                        <!-- delete -->
-                                        @can('post_delete')
-                                            <form class="d-inline" role="alert" alert-text="{{ trans('posts.alert.delete.message.confirm',['title' => $post->title]) }}"  action="{{ route('posts.destroy',['post' => $post]) }}" method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">
-                                                <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-                                        @endcan
-                                    </div>
-                                </div>
-                            </div>
-                        @empty
-                            <p>
-                                <strong>
-                                    @if (request()->get('keyword'))
-                                        {{ trans('posts.label.no_data.search',['keyword'=> request()->get('keyword')]) }}
-                                    @else
-                                        {{ trans('posts.label.no_data.fetch') }}
-                                    @endif
-                                </strong>
-                            </p>
-                        @endforelse
-                    </ul>
+                
+                <div class="card-body p-0">
+                    <table class="table table-striped projects">
+                        <thead>
+                            <tr>
+                                <th class="text-center" style="width: 1%">
+                                    No
+                                </th>
+                                <th class="text-center">
+                                    Title
+                                </th>
+                                <th class="text-center">
+                                    Description
+                                </th>
+                                <th class="text-center">
+                                    Status
+                                </th>
+                                <th class="text-center">
+                                    Action
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @forelse ($posts as $post)
+                            <tr>
+                                <td>
+                                    #
+                                </td>
+                                <td>
+                                    <a>
+                                        {{ $post->title }}
+                                    </a>
+                                    <br/>
+                                    <small>
+                                        {{ $post->updated_at }}
+                                    </small>
+                                </td>
+                                <td>
+                                    {{ Str::limit($post->description, 50) }}
+                                </td>
+                                <td class="project-state">
+                                    <span class="badge {{ $post->status == 'draft' ? 'badge-info' : 'badge-success' }}"> 
+                                        {{ $post->status }}
+                                    </span>
+                                </td>
+                                <td class="project-actions text-center">
+                                    <!-- detail -->
+                                    @can('post_detail')
+                                        <a class="btn btn-primary btn-sm" href="{{ route('posts.show', ['post' => $post]) }}">
+                                            <i class="fas fa-eye"></i>
+                                        </a>
+                                    @endcan
+                                    <!-- edit -->
+                                    @can('post_update')
+                                        <a class="btn btn-info btn-sm" href="{{ route('posts.edit', ['post' => $post]) }}">
+                                            <i class="fas fa-edit"></i>
+                                        </a>
+                                    @endcan
+                                    <!-- delete -->
+                                    @can('post_delete')
+                                        <form class="d-inline" role="alert" alert-text="{{ trans('posts.alert.delete.message.confirm',['title' => $post->title]) }}"  action="{{ route('posts.destroy',['post' => $post]) }}" method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="btn btn-sm btn-danger">
+                                            <i class="fas fa-trash"></i>
+                                            </button>
+                                        </form>
+                                    @endcan
+                                </td>
+                            </tr>
+                            @empty
+                                <p>
+                                    <strong>
+                                        @if (request()->get('keyword'))
+                                            {{ trans('posts.label.no_data.search',['keyword'=> request()->get('keyword')]) }}
+                                        @else
+                                            {{ trans('posts.label.no_data.fetch') }}
+                                        @endif
+                                    </strong>
+                                </p>
+                            @endforelse
+                        </tbody>
+                    </table>
                 </div>
-                @if ($posts->hasPages())
-                    <div class="card-footer">
-                        {{ $posts->links('vendor.pagination.bootstrap-4') }}
-                    </div>
-                @endif
+                <!-- /.card-body -->
             </div>
-        </div>
+            <!-- /.card -->
+
+        </section>
+        <!-- /.content -->
     </div>
+    <!-- /.content-wrapper -->
 @endsection
 
 @push('javascript-internal')

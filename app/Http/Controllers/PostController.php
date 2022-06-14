@@ -28,8 +28,11 @@ class PostController extends Controller
      */
     public function index(Request $request)
     {
+        // $pagination = 5;
+        // $articles   = Post::orderBy('created_at', 'desc')->paginate($pagination);
+
         $statusSelected = in_array($request->get('status'),['publish','draft']) ? $request->get('status') : "publish";
-        $posts = $statusSelected == "publish" ? Post::publish() : Post::draft();
+        $posts = $statusSelected == "publish" ? Post::publish()->orderBy('created_at', 'desc') : Post::draft()->orderBy('created_at', 'desc');
         if ($request->get('keyword')) {
             $posts->search($request->get('keyword'));
         }

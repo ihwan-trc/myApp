@@ -1,7 +1,7 @@
 @foreach ($categories as $category)
     <!-- category list -->
     <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center pr-0">
-        <label class="mt-auto mb-auto">
+        <label class="mt-auto mb-auto text-white">
         <!-- todo: show category title -->
         {{ str_repeat('-',$count) . ' ' . $category->title }}
         </label>

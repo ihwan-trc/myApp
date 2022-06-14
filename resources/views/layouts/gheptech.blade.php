@@ -9,8 +9,7 @@
     <title>{{ config('app.name') }} - @yield('title')</title>
 
     <!-- Favicons -->
-    <link href="{{ asset('vendor/gheptech/img/favicon.png') }}" rel="icon">
-    <link href="{{ asset('vendor/gheptech/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+    <link href="{{ asset('vendor/gheptech/img/new-icon.ico') }}" rel="icon">
 
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Jost:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
@@ -35,7 +34,7 @@
         <div class="container d-flex align-items-center">
             <!-- <h1 class="logo me-auto"><a href="index.html">Arsha</a></h1> -->
             <!-- Uncomment below if you prefer to use an image logo -->
-            <a href="{{ route('gheptech.home') }}" class="logo me-auto"><img src="{{ asset('vendor/gheptech/img/logo.png') }}" alt="" class="img-fluid"></a>
+            <a href="{{ route('gheptech.home') }}" class="logo me-auto"><img src="{{ asset('vendor/gheptech/img/logo-new.png') }}" alt="" class="img-fluid"></a>
 
             <!-- Navigation:start -->
             @include('layouts._gheptech._navbar')

@@ -4,91 +4,112 @@
     {{ trans('tags.title.index') }}
 @endsection
 
-@section('breadcrumbs')
-    {{ Breadcrumbs::render('tags') }}
-@endsection
-
 @section('content')
-    <!-- section:content -->
-<div class="row">
-    <div class="col-md-12">
-        <div class="card">
-            <div class="card-header">
-                <div class="row">
-                    <div class="col-md-6">
-                    <form action="{{ route('tags.index') }}" method="GET">
-                        <div class="input-group">
-                            <input name="keyword" value="{{ request()->get('keyword') }}" type="search" class="form-control" placeholder="{{ trans('tags.form_control.input.search.placeholder') }}">
-                            <div class="input-group-append">
-                                <button class="btn btn-primary" type="submit">
-                                <i class="fas fa-search"></i>
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-                    </div>
-                    <div class="col-md-6">
-                        @can('tag_create')
-                            <a href="{{ route('tags.create') }}" class="btn btn-primary float-right" role="button">
-                                {{ trans('tags.button.create.value') }}
-                                <i class="fas fa-plus-square"></i>
-                            </a>
-                        @endcan
-                    </div>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <div class="container-fluid">
+                <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1>{{ trans('tags.title.index') }}</h1>
                 </div>
-            </div>
-            <div class="card-body">
-                <ul class="list-group list-group-flush">
-                    <!-- tag list -->
-                        @if (count($tags))
-                            @foreach ($tags as $tag)
-                                <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center pr-0">
-                                    <label class="mt-auto mb-auto">
-                                    <!-- todo: show tag title -->
-                                    {{ $tag->title }}
-                                    </label>
-                                    <div>
-                                    <!-- edit -->
-                                    @can('tag_update')
-                                        <a href="{{ route('tags.edit',['tag' => $tag]) }}" class="btn btn-sm btn-info" role="button">
-                                            <i class="fas fa-edit"></i>
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item">{{ Breadcrumbs::render('tags') }}</li>
+                    </ol>
+                </div>
+                </div>
+            </div><!-- /.container-fluid -->
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="row">
+                                <div class="col-md-6">
+                                <form action="{{ route('tags.index') }}" method="GET">
+                                    <div class="input-group">
+                                        <input name="keyword" value="{{ request()->get('keyword') }}" type="search" class="form-control" placeholder="{{ trans('tags.form_control.input.search.placeholder') }}">
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit">
+                                            <i class="fas fa-search"></i>
+                                            </button>
+                                        </div>
+                                    </div>
+                                </form>
+                                </div>
+                                <div class="col-md-6">
+                                    @can('tag_create')
+                                        <a href="{{ route('tags.create') }}" class="btn btn-primary float-right" role="button">
+                                            {{ trans('tags.button.create.value') }}
+                                            <i class="fas fa-plus-square"></i>
                                         </a>
                                     @endcan
-                                    <!-- delete -->
-                                    @can('tag_delete')
-                                        <form class="d-inline" role="alert" alert-text="{{ trans('tags.alert.delete.message.confirm',['title' => $tag->title]) }}"  action="{{ route('tags.destroy',['tag' => $tag]) }}" method="POST">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="btn btn-sm btn-danger">
-                                            <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    @endcan
-                                    </div>
-                                </li>
-                            @endforeach
-                        @else
-                            <p>
-                                <strong>
-                                    @if (request()->get('keyword'))
-                                        {{ trans('categories.label.no_data.search',['keyword' => request()->get('keyword') ]) }}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <!-- tag list -->
+                                    @if (count($tags))
+                                        @foreach ($tags as $tag)
+                                            <li class="list-group-item list-group-item-action d-flex justify-content-between align-items-center pr-0 text-white">
+                                                <label class="mt-auto mb-auto">
+                                                <!-- todo: show tag title -->
+                                                {{ $tag->title }}
+                                                </label>
+                                                <div>
+                                                <!-- edit -->
+                                                @can('tag_update')
+                                                    <a href="{{ route('tags.edit',['tag' => $tag]) }}" class="btn btn-sm btn-info" role="button">
+                                                        <i class="fas fa-edit"></i>
+                                                    </a>
+                                                @endcan
+                                                <!-- delete -->
+                                                @can('tag_delete')
+                                                    <form class="d-inline" role="alert" alert-text="{{ trans('tags.alert.delete.message.confirm',['title' => $tag->title]) }}"  action="{{ route('tags.destroy',['tag' => $tag]) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm btn-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </form>
+                                                @endcan
+                                                </div>
+                                            </li>
+                                        @endforeach
                                     @else
-                                        {{ trans('categories.label.no_data.fetch') }}
+                                        <p>
+                                            <strong>
+                                                @if (request()->get('keyword'))
+                                                    {{ trans('categories.label.no_data.search',['keyword' => request()->get('keyword') ]) }}
+                                                @else
+                                                    {{ trans('categories.label.no_data.fetch') }}
+                                                @endif
+                                            </strong>
+                                        </p>
                                     @endif
-                                </strong>
-                            </p>
+                                <!-- end  tag list -->
+                            </ul>
+                        </div>
+                        @if ($tags->hasPages())
+                            <div class="card-footer">
+                                {{ $tags->links('vendor.pagination.bootstrap-4') }}
+                            </div>
                         @endif
-                    <!-- end  tag list -->
-                </ul>
-            </div>
-            @if ($tags->hasPages())
-                <div class="card-footer">
-                    {{ $tags->links('vendor.pagination.bootstrap-4') }}
+                    </div>
                 </div>
-            @endif
-        </div>
+            </div>
+
+        </section>
+        <!-- /.content -->
     </div>
-</div>
+    <!-- /.content-wrapper -->
 @endsection
 
 @push('javascript-internal')

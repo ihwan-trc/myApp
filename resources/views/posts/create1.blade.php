@@ -4,28 +4,13 @@
     {{ trans('posts.title.create') }}
 @endsection
 
+@section('breadcrumbs')
+    {{ Breadcrumbs::render('add_post') }}
+@endsection
+
 @section('content')
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <!-- Content Header (Page header) -->
-        <section class="content-header">
-            <div class="container-fluid">
-                <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1>{{ trans('posts.title.create') }}</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">{{ Breadcrumbs::render('add_post') }}</li>
-                    </ol>
-                </div>
-                </div>
-            </div><!-- /.container-fluid -->
-        </section>
-
-        <!-- Main content -->
-        <section class="content">
-
+    <div class="row">
+        <div class="col-md-12">
             <form action="{{ route('posts.store') }}" method="POST">
                 @csrf
                 <div class="card">
@@ -195,11 +180,8 @@
                     </div>
                 </div>
             </form>
-
-        </section>
-        <!-- /.content -->
+        </div>
     </div>
-    <!-- /.content-wrapper -->
 @endsection
 
 @push('css-external')
