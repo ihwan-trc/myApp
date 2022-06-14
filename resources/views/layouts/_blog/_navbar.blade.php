@@ -33,7 +33,7 @@
                   {{ trans('blog.menu.categories') }}
                 </a>
              </li>
-             <!-- nav-categories:tags -->
+             <!-- nav-tags:start -->
              <li class="nav-item {{ set_active(['blog.tags']) }}">
                 <a class="nav-link" href="{{ route('blog.tags') }}">
                   {{ trans('blog.menu.tags') }}

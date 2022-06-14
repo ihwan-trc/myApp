@@ -4,7 +4,7 @@
             <div class="row">
 
                 <div class="col-lg-3 col-md-6 footer-contact">
-                    <h3><a href="index.html" class="logo me-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a></h3>
+                    <h3><a href="index.html" class="logo me-auto"><img src="{{ asset('vendor/gheptech/img/logo.png') }}" alt="" class="img-fluid"></a></h3>
                     <p>
                         Jl.Arumba No.31 <br>
                         Malang, 58167<br>

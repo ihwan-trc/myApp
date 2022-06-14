@@ -48,7 +48,7 @@
     <!-- content:end -->
 
     <!-- Footer:start -->
-    @include('layouts._blog._footer')
+    @include('layouts._gheptech._footer')
     <!-- Footer:end -->
 
     <div id="preloader"></div>
