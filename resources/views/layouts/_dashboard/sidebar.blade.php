@@ -12,7 +12,7 @@
     <!-- SidebarSearch Form -->
     <div class="form-inline">
         <div class="input-group" data-widget="sidebar-search">
-            <input class="form-control form-control-sidebar" type="search" placeholder="{{ trans('categories.form_control.input.search.placeholder') }}" aria-label="Search">
+            <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search">
             <div class="input-group-append">
                 <button class="btn btn-sidebar">
                     <i class="fas fa-search fa-fw"></i>
@@ -59,21 +59,21 @@
             </li>
             {{-- Gheptech > shop --}}
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link {{ set_active(['categoriesshop.index','categoriesshop.create','categoriesshop.edit','categoriesshop.show']) }}">
                     <i class="nav-icon fas fa-copy"></i>
-                    <p>Shop<i class="fas fa-angle-left right"></i><span class="badge badge-info right">6</span></p>
+                    <p>Shops<i class="fas fa-angle-right right"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
                         <a href="pages/layout/top-nav.html" class="nav-link">
                             <i class="far fa-circle nav-icon"></i>
-                            <p>menu 1</p>
+                            <p>Shops</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                        <a href="{{ route('categoriesshop.index') }}" class="nav-link {{ set_active(['categoriesshop.index','categoriesshop.create','categoriesshop.edit','categoriesshop.show']) }}">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>menu 2</p>
+                        <p>Categories</p>
                         </a>
                     </li>
                 </ul>
@@ -165,33 +165,68 @@
 
             {{-- Blog --}}
             <li class="nav-header">BLOG</li>
+            <li class="nav-item">
+                <a href="#" class="nav-link {{ set_active(['posts.index','posts.create','posts.edit','posts.show','categories.index','categories.create','categories.edit','categories.show','tags.index','tags.create','tags.edit']) }}">
+                    <i class="fas fa-newspaper"></i>
+                    <p>Blog<i class="fas fa-angle-right right"></i></p>
+                </a>
+                <ul class="nav nav-treeview">
+                    {{-- Blog > posts --}}
+                    @can('manage_posts')
+                        <li class="nav-item">
+                            <a href="{{ route('posts.index') }}" class="nav-link {{ set_active(['posts.index','posts.create','posts.edit','posts.show']) }}">
+                                <i class="fas fa-newspaper"></i>
+                                <p>{{ trans('dashboard.link.posts') }}</p>
+                            </a>
+                        </li>
+                    @endcan
+                    {{-- Blog > categories --}}
+                    @can('manage_categories')
+                        <li class="nav-item">
+                            <a href="{{ route('categories.index') }}" class="nav-link {{ set_active(['categories.index','categories.create','categories.edit','categories.show']) }}">
+                                <i class="fas fa-bookmark"></i>
+                                <p>{{ trans('dashboard.link.categories') }}</p>
+                            </a>
+                        </li>
+                    @endcan
+                    {{-- Blog > tags --}}
+                    @can('manage_tags')
+                        <li class="nav-item">
+                            <a href="{{ route('tags.index') }}" class="nav-link {{ set_active(['tags.index','tags.create','tags.edit']) }}">
+                                <i class="fas fa-tags"></i>
+                                <p>{{ trans('dashboard.link.tags') }}</p>
+                            </a>
+                        </li>
+                    @endcan
+                </ul>
+            </li>
             {{-- Blog > posts --}}
-            @can('manage_posts')
+            {{-- @can('manage_posts')
                 <li class="nav-item">
                     <a href="{{ route('posts.index') }}" class="nav-link {{ set_active(['posts.index','posts.create','posts.edit','posts.show']) }}">
                         <i class="fas fa-newspaper"></i>
                         <p>{{ trans('dashboard.link.posts') }}</p>
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
             {{-- Blog > categories --}}
-            @can('manage_categories')
+            {{-- @can('manage_categories')
                 <li class="nav-item">
                     <a href="{{ route('categories.index') }}" class="nav-link {{ set_active(['categories.index','categories.create','categories.edit','categories.show']) }}">
                         <i class="fas fa-bookmark"></i>
                         <p>{{ trans('dashboard.link.categories') }}</p>
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
             {{-- Blog > tags --}}
-            @can('manage_tags')
+            {{-- @can('manage_tags')
                 <li class="nav-item">
                     <a href="{{ route('tags.index') }}" class="nav-link {{ set_active(['tags.index','tags.create','tags.edit']) }}">
                         <i class="fas fa-tags"></i>
                         <p>{{ trans('dashboard.link.tags') }}</p>
                     </a>
                 </li>
-            @endcan
+            @endcan --}}
 
             {{-- Setting --}}
             <li class="nav-header">{{ trans('dashboard.menu.setting') }}</li>

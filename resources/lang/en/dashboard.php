@@ -10,9 +10,9 @@ return [
         'welcome' => "Welcome :name"
     ],
     'menu' => [
-        'master' => 'Master',
-        'user_permission' => 'User permission',
-        'setting' => 'Setting',
+        'master' => 'MASTER',
+        'user_permission' => 'USER PERMISSION',
+        'setting' => 'SETTING',
     ],
     'link' => [
         'dashboard' => 'Dashboard',
