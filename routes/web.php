@@ -34,8 +34,16 @@ Auth::routes([
 Route::group(['prefix' => 'dashboard','middleware' => ['web','auth']],function(){
     // Dashboard
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
+<<<<<<< HEAD
     //Categoryshop
     Route::resource('/categoriesshop',\App\Http\Controllers\CategoryshopsController::class);
+=======
+    // CategoriesShop
+    Route::get('/categoriesshop/select',[\App\Http\Controllers\CategoryShopController::class, 'select'])->name('categoriesshop.select');
+    Route::resource('/categoriesshop', \App\Http\Controllers\CategoryShopController::class);
+
+
+>>>>>>> d355045b5007d837baa09b78c2391e2e3efe2646
     // Categories
     Route::get('/categories/select',[\App\Http\Controllers\CategoryController::class, 'select'])->name('categories.select');
     Route::resource('/categories', \App\Http\Controllers\CategoryController::class);

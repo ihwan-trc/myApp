@@ -10,9 +10,9 @@ return [
         'welcome' => "Selamat datang :name"
     ],
     'menu' => [
-        'master' => 'Master',
-        'user_permission' => 'Izin pengguna',
-        'setting' => 'Pengaturan',
+        'master' => 'MASTER',
+        'user_permission' => 'IZIN PENGGUNA',
+        'setting' => 'PENGATURAN',
     ],
     'link' => [
         'dashboard' => 'Dashboard',
