@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 |
 */
 
+
 Route::get('/localization/{language}',[\App\Http\Controllers\LocalizationController::class, 'switch'])->name('localization.switch');
 
 Route::get('/', [\App\Http\Controllers\BlogController::class, 'home'])->name('blog.home');
@@ -33,6 +34,8 @@ Auth::routes([
 Route::group(['prefix' => 'dashboard','middleware' => ['web','auth']],function(){
     // Dashboard
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
+    //Categoryshop
+    Route::resource('/categoriesshop',\App\Http\Controllers\CategoryshopsController::class);
     // Categories
     Route::get('/categories/select',[\App\Http\Controllers\CategoryController::class, 'select'])->name('categories.select');
     Route::resource('/categories', \App\Http\Controllers\CategoryController::class);

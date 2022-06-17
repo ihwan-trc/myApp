@@ -50,7 +50,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                        <a href="" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
                         <p>menu 2</p>
                         </a>
@@ -71,9 +71,9 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="pages/layout/top-nav-sidebar.html" class="nav-link">
+                        <a href="{{ route('categoriesshop.index') }}" class="nav-link">
                         <i class="far fa-circle nav-icon"></i>
-                        <p>menu 2</p>
+                        <p>Categories</p>
                         </a>
                     </li>
                 </ul>
