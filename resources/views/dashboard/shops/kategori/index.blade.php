@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-{{ trans('categories.title.index') }}
+    {{ trans('kategori.title.index') }}
 @endsection
 
 @section('content')
@@ -12,11 +12,13 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{ trans('categories.title.index') }}</h1>
+                    <h1>{{ trans('kategori.title.index') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">{{ Breadcrumbs::render('categories') }}</li>
+                        <li class="breadcrumb-item">
+                            {{ Breadcrumbs::render('kategori') }}
+                        </li>
                     </ol>
                 </div>
                 </div>
@@ -31,9 +33,9 @@
                 <div class="card-header">
                     <div class="row">
                         <div class="col-md-6">
-                        <form action="{{ route('categoriesshop.index') }}" method="GET">
+                        <form action="{{ route('kategori.index') }}" method="GET">
                             <div class="input-group">
-                                <input name="keyword" type="search" class="form-control" placeholder="{{ trans('categories.form_control.input.search.placeholder') }}" value="{{ request()->get('keyword') }}">
+                                <input name="keyword" type="search" class="form-control" placeholder="{{ trans('kategori.form_control.input.search.placeholder') }}" value="{{ request()->get('keyword') }}">
                                 <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">
                                     <i class="fas fa-search"></i>
@@ -43,41 +45,41 @@
                         </form>
                         </div>
                         <div class="col-md-6">
-                            @can('category_create')
-                                <a href="{{ route('categoriesshop.create') }}" class="btn btn-primary float-right" role="button">
-                                    {{ trans('categories.title.create') }}
+                                <a href="{{ route('kategori.create') }}" class="btn btn-primary float-right" role="button">
+                                    {{ trans('kategori.title.create') }}
                                     <i class="fas fa-plus-square"></i>
                                 </a>
-                            @endcan
                         </div>
                     </div>
                 </div>
                 <div class="card-body">
                     <ul class="list-group list-group-flush">
                         <!-- list category -->
-                        @if (count($categories))
-                            @include('dashboard.categoriesShop._categoryshops-list',[
-                                'categories' => $categories,
+                        @if (count($kategori))
+                            @include('dashboard.shops.kategori._kategori-list', [
+                                'kategori' => $kategori,
                                 'count' => 0
-                                ])
+                            ])
                         @else
-                        <p>
-                            <strong>
-                                @if (request()->get('keyword'))
-                                    {{ trans('categories.label.no_data.search',['keyword' => request()->get('keyword') ]) }}
-                                @else
-                                    {{ trans('categories.label.no_data.fetch') }}
-                                @endif
-                            </strong>
-                        </p>
-                    @endif
+                            <p>
+                                <strong>
+                                    @if (request()->get('keyword'))
+                                        {{ trans('kategori.label.no_data.search',['keyword' => request()->get('keyword') ]) }}
+                                    @else
+                                        {{ trans('kategori.label.no_data.fetch') }}
+                                    @endif
+                                </strong>
+                            </p>
+                        @endif
                     </ul>
                 </div>
-                @if ($categories->hasPages())
+                
+                @if ($kategori->hasPages())
                 <div class="card-footer">
-                    {{ $categories->links('vendor.pagination.bootstrap-4') }}
+                    {{ $kategori->links('vendor.pagination.bootstrap-4') }}
                 </div>
                 @endif
+                
             </div>
             <!-- /.card -->
 

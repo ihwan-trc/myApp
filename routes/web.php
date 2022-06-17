@@ -34,6 +34,16 @@ Auth::routes([
 Route::group(['prefix' => 'dashboard','middleware' => ['web','auth']],function(){
     // Dashboard
     Route::get('/', [\App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
+
+    //Kategori
+    Route::get('/kategori/select',[\App\Http\Controllers\KategoriController::class, 'select'])->name('kategori.select');
+    Route::resource('/kategori', \App\Http\Controllers\KategoriController::class);
+
+
+
+
+
+
     // Categories
     Route::get('/categories/select',[\App\Http\Controllers\CategoryController::class, 'select'])->name('categories.select');
     Route::resource('/categories', \App\Http\Controllers\CategoryController::class);

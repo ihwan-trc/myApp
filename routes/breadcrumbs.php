@@ -56,6 +56,29 @@ Breadcrumbs::for('dashboard_home', function ($trail) {
     $trail->parent('dashboard');
     $trail->push('Home', '#');
 });
+// Dashboard >Kategori
+Breadcrumbs::for('kategori', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Categories', route('kategori.index'));
+});
+// Dashboard > Kategori > detail
+Breadcrumbs::for('kategori_detail', function ($trail,$kategori) {
+    $trail->parent('kategori');
+    $trail->push($kategori->title);
+});
+// Dashboard > Kategori > edit
+Breadcrumbs::for('kategori_edit', function ($trail,$kategori) {
+    $trail->parent('kategori');
+    $trail->push('Edit', route('kategori.edit',['kategori' => $kategori]));
+});
+
+
+
+
+
+
+
+
 // Dashboard >Categories
 Breadcrumbs::for('categories', function ($trail) {
     $trail->parent('dashboard');

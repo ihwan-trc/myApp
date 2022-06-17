@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-   {{ trans('categories.title.create') }}
+   {{ trans('kategori.title.create') }}
 @endsection
 
 @section('content')
@@ -12,11 +12,11 @@
          <div class="container-fluid">
                <div class="row mb-2">
                <div class="col-sm-6">
-                  <h1>{{ trans('categories.title.create') }}</h1>
+                  <h1>{{ trans('kategori.title.create') }}</h1>
                </div>
                <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
-                     <li class="breadcrumb-item">{{Breadcrumbs::render('add_category')}}</li>
+                     {{-- <li class="breadcrumb-item">{{Breadcrumbs::render('add_category')}}</li> --}}
                   </ol>
                </div>
                </div>
@@ -30,14 +30,14 @@
             <div class="col-md-12">
                <div class="card">
                   <div class="card-body">
-                     <form action="{{ route('categories.store') }}" method="POST">
+                     <form action="{{ route('kategori.store') }}" method="POST">
                            @csrf
                            <!-- title -->
                            <div class="form-group">
                               <label for="input_category_title" class="font-weight-bold">
-                              {{ trans('categories.form_control.input.title.label') }}
+                              {{ trans('kategori.form_control.input.title.label') }}
                               </label>
-                              <input id="input_category_title" value="{{ old('title') }}" name="title" type="text" class="form-control @error('title') is-invalid @enderror" placeholder="{{ trans('categories.form_control.input.title.placeholder') }}" />
+                              <input id="input_category_title" value="{{ old('title') }}" name="title" type="text" class="form-control @error('title') is-invalid @enderror" placeholder="{{ trans('kategori.form_control.input.title.placeholder') }}" />
                               @error('title')
                               <span class="invalid-feedback" role="alert">
                                  <strong>{{ $message }}</strong>
@@ -47,9 +47,9 @@
                            <!-- slug -->
                            <div class="form-group">
                               <label for="input_category_slug" class="font-weight-bold">
-                              {{ trans('categories.form_control.input.slug.label') }}
+                              {{ trans('kategori.form_control.input.slug.label') }}
                               </label>
-                              <input id="input_category_slug" value="{{ old('slug') }}" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror" placeholder="{{ trans('categories.form_control.input.slug.placeholder') }}" readonly />
+                              <input id="input_category_slug" value="{{ old('slug') }}" name="slug" type="text" class="form-control @error('slug') is-invalid @enderror" placeholder="{{ trans('kategori.form_control.input.slug.placeholder') }}" readonly />
                               @error('slug')
                               <span class="invalid-feedback" role="alert">
                                  <strong>{{ $message }}</strong>
@@ -59,15 +59,15 @@
                            <!-- thumbnail -->
                            <div class="form-group">
                               <label for="input_category_thumbnail" class="font-weight-bold">
-                              {{ trans('categories.form_control.input.thumbnail.label') }}
+                              {{ trans('kategori.form_control.input.thumbnail.label') }}
                               </label>
                               <div class="input-group">
                               <div class="input-group-prepend">
                                  <button id="button_category_thumbnail" data-input="input_category_thumbnail" data-preview="holder" class="btn btn-primary" type="button">
-                                       {{ trans('categories.button.browse.value') }}
+                                       {{ trans('kategori.button.browse.value') }}
                                  </button>
                               </div>
-                              <input id="input_category_thumbnail" name="thumbnail" value="{{ old('thumbnail') }}" type="text" class="form-control @error('thumbnail') is-invalid @enderror" placeholder="{{ trans('categories.form_control.input.thumbnail.placeholder') }}" readonly />
+                              <input id="input_category_thumbnail" name="thumbnail" value="{{ old('thumbnail') }}" type="text" class="form-control @error('thumbnail') is-invalid @enderror" placeholder="{{ trans('kategori.form_control.input.thumbnail.placeholder') }}" readonly />
                               @error('thumbnail')
                                  <span class="invalid-feedback" role="alert">
                                        <strong>{{ $message }}</strong>
@@ -79,8 +79,8 @@
                            <div id="holder"></div>
                            <!-- parent_category -->
                            <div class="form-group">
-                              <label for="select_category_parent" class="font-weight-bold">{{ trans('categories.form_control.select.parent_category.label') }}</label>
-                              <select id="select_category_parent" name="parent_category" data-placeholder="{{ trans('categories.form_control.select.parent_category.placeholder') }}" class="custom-select w-100">
+                              <label for="select_category_parent" class="font-weight-bold">{{ trans('kategori.form_control.select.parent_category.label') }}</label>
+                              <select id="select_category_parent" name="parent_category" data-placeholder="{{ trans('kategori.form_control.select.parent_category.placeholder') }}" class="custom-select w-100">
                               @if (old('parent_category'))
                                  <option value="{{ old('parent_category')->id }}" selected>{{ old('parent_category')->title }}</option>
                               @endif
@@ -89,9 +89,9 @@
                            <!-- description -->
                            <div class="form-group">
                               <label for="input_category_description" class="font-weight-bold">
-                              {{ trans('categories.form_control.textarea.description.label') }}
+                              {{ trans('kategori.form_control.textarea.description.label') }}
                               </label>
-                              <textarea id="input_category_description" name="description" class="form-control @error('description') is-invalid @enderror" rows="3" placeholder="{{ trans('categories.form_control.textarea.description.placeholder') }}">{{ old('description') }}</textarea>
+                              <textarea id="input_category_description" name="description" class="form-control @error('description') is-invalid @enderror" rows="3" placeholder="{{ trans('kategori.form_control.textarea.description.placeholder') }}">{{ old('description') }}</textarea>
                               @error('description')
                               <span class="invalid-feedback" role="alert">
                                  <strong>{{ $message }}</strong>
@@ -99,8 +99,8 @@
                               @enderror
                            </div>
                            <div class="float-right">
-                              <a class="btn btn-warning px-4" href="{{ route('categories.index') }}">{{ trans('categories.button.back.value') }}</a>
-                              <button type="submit" class="btn btn-primary px-4">{{ trans('categories.button.save.value') }}</button>
+                              <a class="btn btn-warning px-4" href="{{ route('kategori.index') }}">{{ trans('kategori.button.back.value') }}</a>
+                              <button type="submit" class="btn btn-primary px-4">{{ trans('kategori.button.save.value') }}</button>
                            </div>                
                      </form>
                   </div>
@@ -143,7 +143,7 @@
             language: "{{ app()->getLocale() }}",
             allowClear: true,
             ajax: {
-               url: "{{ route('categories.select') }}",
+               url: "{{ route('kategori.select') }}",
                dataType: 'json',
                delay: 250,
                processResults: function(data) {

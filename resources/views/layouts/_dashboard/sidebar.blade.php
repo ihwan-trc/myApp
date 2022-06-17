@@ -59,7 +59,7 @@
             </li>
             {{-- Gheptech > shop --}}
             <li class="nav-item">
-                <a href="#" class="nav-link {{ set_active(['categoriesshop.index','categoriesshop.create','categoriesshop.edit','categoriesshop.show']) }}">
+                <a href="#" class="nav-link">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>Shops<i class="fas fa-angle-right right"></i></p>
                 </a>
@@ -71,8 +71,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('categoriesshop.index') }}" class="nav-link {{ set_active(['categoriesshop.index','categoriesshop.create','categoriesshop.edit','categoriesshop.show']) }}">
-                        <i class="far fa-circle nav-icon"></i>
+                        <a href="{{ route('kategori.index') }}" class="nav-link">
+                        <i class="far fa-circle text-danger nav-icon"></i>
                         <p>Categories</p>
                         </a>
                     </li>
