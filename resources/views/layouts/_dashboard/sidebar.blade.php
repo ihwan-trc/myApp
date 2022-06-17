@@ -71,11 +71,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-<<<<<<< HEAD
-                        <a href="{{ route('categoriesshop.index') }}" class="nav-link">
-=======
                         <a href="{{ route('categoriesshop.index') }}" class="nav-link {{ set_active(['categoriesshop.index','categoriesshop.create','categoriesshop.edit','categoriesshop.show']) }}">
->>>>>>> d355045b5007d837baa09b78c2391e2e3efe2646
                         <i class="far fa-circle nav-icon"></i>
                         <p>Categories</p>
                         </a>
