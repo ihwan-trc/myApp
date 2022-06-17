@@ -56,19 +56,6 @@ Breadcrumbs::for('dashboard_home', function ($trail) {
     $trail->parent('dashboard');
     $trail->push('Home', '#');
 });
-// Dashboard >Categoriesshop
-Breadcrumbs::for('categoriesshop', function ($trail) {
-    $trail->parent('dashboard');
-    $trail->push('Shops', route('categoriesshop.index'));
-    $trail->push('Categories', '#');
-});
-// Dashboard > Categoriesshop > add
-Breadcrumbs::for('add_categoryshop', function ($trail) {
-    $trail->parent('categoriesshop');
-    $trail->push('Add', route('categoriesshop.create'));
-});
-
-
 // Dashboard >Categories
 Breadcrumbs::for('categories', function ($trail) {
     $trail->parent('dashboard');

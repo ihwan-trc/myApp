@@ -19,11 +19,6 @@ class DatabaseSeeder extends Seeder
             CategoryTableSeeder::class,
             TagTableSeeder::class,
             PermissionTableSeeder::class,
-<<<<<<< HEAD
-            CategoryshopsTableSeeder::class,
-=======
-            CategoryShopTableSeeder::class
->>>>>>> d355045b5007d837baa09b78c2391e2e3efe2646
         ]);
     }
 }
