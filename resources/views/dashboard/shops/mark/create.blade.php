@@ -30,7 +30,7 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('tags.store') }}" method="POST">
+                            <form action="{{ route('mark.store') }}" method="POST">
                                 @csrf
                                 <!-- title -->
                                 <div class="form-group">
@@ -65,7 +65,7 @@
                                     @enderror
                                 </div>
                                 <div class="float-right">
-                                    <a class="btn btn-warning px-4 mx-2" href="{{ route('tags.index') }}">
+                                    <a class="btn btn-warning px-4 mx-2" href="{{ route('mark.index') }}">
                                         {{ trans('tags.button.back.value') }}
                                     </a>
                                     <button type="submit" class="btn btn-primary float-right px-4">

@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    {{ trans('tags.title.create') }}
+    {{ trans('tags.title.edit') }}
 @endsection
 
 @section('content')
@@ -12,11 +12,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{ trans('tags.title.create') }}</h1>
+                    <h1>{{ trans('tags.title.edit') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">{{ Breadcrumbs::render('add_tag') }}</li>
+                        <li class="breadcrumb-item">{{ Breadcrumbs::render('edit_tag',$mark) }}</li>
                     </ol>
                 </div>
                 </div>
@@ -30,14 +30,15 @@
                 <div class="col-md-12">
                     <div class="card">
                         <div class="card-body">
-                            <form action="{{ route('tags.store') }}" method="POST">
+                            <form action="{{ route('mark.update', ['mark' => $mark]) }}" method="POST">
                                 @csrf
+                                @method('PUT')
                                 <!-- title -->
                                 <div class="form-group">
                                 <label for="input_tag_title" class="font-weight-bold">
                                     {{ trans('tags.form_control.input.title.label') }}
                                 </label>
-                                <input id="input_tag_title" value="{{ old('title') }}" name="title" type="text"
+                                <input id="input_tag_title" value="{{ old('title',$mark->title) }}" name="title" type="text"
                                     class="form-control @error('title') is-invalid @enderror"
                                     placeholder="{{ trans('tags.form_control.input.title.placeholder') }}" />
                                     @error('title')
@@ -53,7 +54,7 @@
                                 <label for="input_tag_slug" class="font-weight-bold">
                                     {{ trans('tags.form_control.input.slug.label') }}
                                 </label>
-                                <input id="input_tag_slug" value="{{ old('slug') }}" name="slug" type="text"
+                                <input id="input_tag_slug" value="{{ old('slug',$mark->slug) }}" name="slug" type="text"
                                     class="form-control @error('slug') is-invalid @enderror"
                                     placeholder="{{ trans('tags.form_control.input.slug.placeholder') }}" readonly />
                                     @error('slug')
@@ -65,11 +66,11 @@
                                     @enderror
                                 </div>
                                 <div class="float-right">
-                                    <a class="btn btn-warning px-4 mx-2" href="{{ route('tags.index') }}">
+                                    <a class="btn btn-warning px-4 mx-2" href="{{ route('mark.index') }}">
                                         {{ trans('tags.button.back.value') }}
                                     </a>
                                     <button type="submit" class="btn btn-primary float-right px-4">
-                                        {{ trans('tags.button.save.value') }}
+                                        {{ trans('tags.button.edit.value') }}
                                     </button>
                                 </div>
                             </form>

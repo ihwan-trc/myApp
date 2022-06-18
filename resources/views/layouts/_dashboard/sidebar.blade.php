@@ -59,21 +59,27 @@
             </li>
             {{-- Gheptech > shop --}}
             <li class="nav-item">
-                <a href="#" class="nav-link">
+                <a href="#" class="nav-link {{ set_active(['shops.index','shops.create','shops.edit','shops.show','kategori.index','kategori.create','kategori.edit','kategori.show','mark.index','mark.create','mark.edit']) }}">
                     <i class="nav-icon fas fa-copy"></i>
                     <p>Shops<i class="fas fa-angle-right right"></i></p>
                 </a>
                 <ul class="nav nav-treeview">
                     <li class="nav-item">
-                        <a href="pages/layout/top-nav.html" class="nav-link">
-                            <i class="far fa-circle nav-icon"></i>
+                        <a href="{{ route('shops.index') }}" class="nav-link {{ set_active(['shops.index','shops.create','shops.edit','shops.show']) }}">
+                            <i class="far fa-circle text-info nav-icon"></i>
                             <p>Shops</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('kategori.index') }}" class="nav-link">
+                        <a href="{{ route('kategori.index') }}" class="nav-link {{ set_active(['kategori.index','kategori.create','kategori.edit','kategori.show']) }}">
                         <i class="far fa-circle text-danger nav-icon"></i>
                         <p>Categories</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('mark.index') }}" class="nav-link {{ set_active(['mark.index','mark.create','mark.edit']) }}">
+                        <i class="far fa-circle text-success nav-icon"></i>
+                        <p>Tags</p>
                         </a>
                     </li>
                 </ul>

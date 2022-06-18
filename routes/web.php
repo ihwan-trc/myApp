@@ -38,6 +38,11 @@ Route::group(['prefix' => 'dashboard','middleware' => ['web','auth']],function()
     //Kategori
     Route::get('/kategori/select',[\App\Http\Controllers\KategoriController::class, 'select'])->name('kategori.select');
     Route::resource('/kategori', \App\Http\Controllers\KategoriController::class);
+    //Mark
+    Route::get('/mark/select',[\App\Http\Controllers\MarkController::class, 'select'])->name('mark.select');
+    Route::resource('/mark', \App\Http\Controllers\MarkController::class)->except(['show']);
+    //Shops
+    Route::resource('/shops', \App\Http\Controllers\ShopController::class);
 
 
 

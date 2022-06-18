@@ -26,7 +26,7 @@
         <!-- Main content -->
         <section class="content">
 
-            <form action="{{ route('posts.store') }}" method="POST">
+            <form action="{{ route('shops.store') }}" method="POST">
                 @csrf
                 <div class="card">
                     <div class="card-body">
@@ -116,15 +116,15 @@
                             </div>
                         </div>
                         <div class="col-md-4">
-                            <!-- category -->
+                            <!-- catgeory -->
                             <div class="form-group">
                                 <label for="input_post_category" class="font-weight-bold">
                                     {{ trans('posts.form_control.input.category.label') }}
                                 </label>
                                 <div class="form-control overflow-auto @error ('category') is-invalid @enderror()" style="height: 886px">
                                     <!-- List category -->
-                                    @include('posts._category-list',[
-                                        'categories' => $categories,
+                                    @include('dashboard.shops._kategori-list',[
+                                        'categories' => $kategori,
                                         'categoryChecked' => old('category')
                                     ])
                                     <!-- List category -->
@@ -149,8 +149,8 @@
                                 <select id="select_post_tag" name="tag[]" data-placeholder="{{ trans('posts.form_control.select.tag.placeholder') }}" class="custom-select w-100 @error ('tag') is-invalid @enderror()"
                                     multiple>
                                     @if (old('tag'))
-                                        @foreach (old('tag') as $tag)
-                                            <option value="{{ $tag->id }}" selected>{{ $tag->title }}</option>
+                                        @foreach (old('tag') as $mark)
+                                            <option value="{{ $mark->id }}" selected>{{ $mark->title }}</option>
                                         @endforeach
                                     @endif
                                 </select>
@@ -206,7 +206,7 @@
     {{-- Select2 --}}
     <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2.min.css') }}">
     <link rel="stylesheet" href="{{ asset('vendor/select2/css/select2-bootstrap4.min.css') }}">
- @endpush
+@endpush
 
 @push('javascript-external')
     {{-- Select2 --}}
@@ -284,7 +284,7 @@
                 language: "{{ app()->getLocale() }}",
                 allowClear: true,
                 ajax: {
-                    url: "{{ route('tags.select') }}",
+                    url: "{{ route('mark.select') }}",
                     dataType: 'json',
                     delay: 250,
                     processResults: function(data) {

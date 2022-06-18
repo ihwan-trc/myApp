@@ -20,6 +20,7 @@ class DatabaseSeeder extends Seeder
             TagTableSeeder::class,
             PermissionTableSeeder::class,
             KategorisTableSeeder::class,
+            MarkTableSeeder::class,
         ]);
     }
 }
