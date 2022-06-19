@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    {{ trans('posts.title.index') }}
+    {{ trans('shops.title.index') }}
 @endsection
 
 @section('content')
@@ -12,11 +12,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{ trans('posts.title.index') }}</h1>
+                    <h1>{{ trans('shops.title.index') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">{{ Breadcrumbs::render('posts') }}</li>
+                        <li class="breadcrumb-item">{{ Breadcrumbs::render('shops') }}</li>
                     </ol>
                 </div>
                 </div>
@@ -41,13 +41,13 @@
                                         @endforeach
                                     </select>
                                     <div class="input-group-append">
-                                    <button class="btn btn-primary" type="submit">{{ trans('posts.button.apply.value') }}</button>
+                                    <button class="btn btn-primary" type="submit">{{ trans('shops.button.apply.value') }}</button>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="input-group mx-1">
-                                    <input name="keyword" value="{{ request()->get('keyword') }}" type="search" class="form-control" placeholder="{{ trans('posts.form_control.input.search.placeholder') }}">
+                                    <input name="keyword" value="{{ request()->get('keyword') }}" type="search" class="form-control" placeholder="{{ trans('shops.form_control.input.search.placeholder') }}">
                                     <div class="input-group-append">
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fas fa-search"></i>
@@ -59,7 +59,7 @@
                         <div class="card-tools">
                             @can('post_create')
                                 <a href="{{ route('shops.create') }}" class="btn btn-primary" role="button">
-                                    {{ trans('posts.button.create.value') }}
+                                    {{ trans('shops.button.create.value') }}
                                     <i class="fas fa-plus-square"></i>
                                 </a>
                             @endcan
@@ -140,9 +140,9 @@
                                 <p>
                                     <strong>
                                         @if (request()->get('keyword'))
-                                            {{ trans('posts.label.no_data.search',['keyword'=> request()->get('keyword')]) }}
+                                            {{ trans('shops.label.no_data.search',['keyword'=> request()->get('keyword')]) }}
                                         @else
-                                            {{ trans('posts.label.no_data.fetch') }}
+                                            {{ trans('shops.label.no_data.fetch') }}
                                         @endif
                                     </strong>
                                 </p>
@@ -168,14 +168,14 @@
             $("form[role='alert']").submit(function(event) {
                 event.preventDefault();
                 Swal.fire({
-                    title: "{{ trans('posts.alert.delete.title') }}",
+                    title: "{{ trans('shops.alert.delete.title') }}",
                     text: $(this).attr('alert-text'),
                     icon: 'warning',
                     allowOutsideClick: false,
                     showCancelButton: true,
-                    cancelButtonText: "{{ trans('posts.button.cancel.value') }}",
+                    cancelButtonText: "{{ trans('shops.button.cancel.value') }}",
                     reverseButtons: true,
-                    confirmButtonText: "{{ trans('posts.button.delete.value') }}",
+                    confirmButtonText: "{{ trans('shops.button.delete.value') }}",
                 }).then((result) => {
                     if (result.isConfirmed) {
                         // todo: process of deleting categories

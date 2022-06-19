@@ -71,6 +71,34 @@ Breadcrumbs::for('kategori_edit', function ($trail,$kategori) {
     $trail->parent('kategori');
     $trail->push('Edit', route('kategori.edit',['kategori' => $kategori]));
 });
+// Dashboard > Kategori > add
+Breadcrumbs::for('kategori_add', function ($trail) {
+    $trail->parent('kategori');
+    $trail->push('Add', route('kategori.create'));
+});
+// Dashboard > Shops
+Breadcrumbs::for('shops', function ($trail) {
+    $trail->parent('dashboard');
+    $trail->push('Shops', route('shops.index'));
+});
+
+// Dashboard > Shops > Add
+Breadcrumbs::for('shops_add', function ($trail) {
+    $trail->parent('shops');
+    $trail->push('Add', route('shops.create'));
+});
+// Dashboard > Shops > Detail > [title]
+Breadcrumbs::for('shops_detail', function ($trail, $shop) {
+    $trail->parent('shops');
+    // $trail->push('Detail', route('posts.show',['post' => $shop]));
+    $trail->push($shop->title, route('shops.show',['shop' => $shop]));
+});
+// Dashboard > Shops > Edit > [title]
+Breadcrumbs::for('shops_edit', function ($trail, $shop) {
+    $trail->parent('shops');
+    // $trail->push('Edit', route('shops.edit',['post' => $shop]));
+    $trail->push($shop->title, route('shops.edit',['shop' => $shop]));
+});
 
 
 

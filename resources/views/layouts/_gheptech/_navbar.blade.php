@@ -1,7 +1,7 @@
 <nav id="navbar" class="navbar">
     <ul>
         <li><a class="nav-link scrollto active" href="#hero">Home</a></li>
-        <li><a class="nav-link scrollto" href="shop.html">Shop</a></li>
+        <li><a class="nav-link scrollto" href="{{ route('product.index') }}">Shop</a></li>
         <li><a class="nav-link scrollto" href="tutorial.html">Tutorial</a></li>
         <li class="dropdown"><a href="#services"><span>Layanan</span> <i class="bi bi-chevron-down"></i></a>
             <ul>

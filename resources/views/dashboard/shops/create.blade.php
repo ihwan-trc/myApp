@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    {{ trans('posts.title.create') }}
+    {{ trans('shops.title.create') }}
 @endsection
 
 @section('content')
@@ -12,11 +12,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{ trans('posts.title.create') }}</h1>
+                    <h1>{{ trans('shops.title.create') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">{{ Breadcrumbs::render('add_post') }}</li>
+                        <li class="breadcrumb-item">{{ Breadcrumbs::render('shops_add') }}</li>
                     </ol>
                 </div>
                 </div>
@@ -35,10 +35,10 @@
                             <!-- title -->
                             <div class="form-group">
                                 <label for="input_post_title" class="font-weight-bold">
-                                    {{ trans('posts.form_control.input.title.label') }}
+                                    {{ trans('shops.form_control.input.title.label') }}
                                 </label>
                                 <input id="input_post_title" value="{{ old('title') }}" name="title" type="text" class="form-control @error ('title') is-invalid @enderror()"
-                                    placeholder="{{ trans('posts.form_control.input.title.placeholder') }}" />
+                                    placeholder="{{ trans('shops.form_control.input.title.placeholder') }}" />
                                 @error('title')
                                     <span class="invalid-feedback">
                                         <strong>
@@ -50,9 +50,9 @@
                             <!-- slug -->
                             <div class="form-group">
                                 <label for="input_post_slug" class="font-weight-bold">
-                                    {{ trans('posts.form_control.input.slug.label') }}
+                                    {{ trans('shops.form_control.input.slug.label') }}
                                 </label>
-                                <input id="input_post_slug" value="{{ old('slug') }}" name="slug" type="text" class="form-control @error ('slug') is-invalid @enderror()" placeholder="{{ trans('posts.form_control.input.slug.placeholder') }}"
+                                <input id="input_post_slug" value="{{ old('slug') }}" name="slug" type="text" class="form-control @error ('slug') is-invalid @enderror()" placeholder="{{ trans('shops.form_control.input.slug.placeholder') }}"
                                     readonly />
                                     @error('slug')
                                     <span class="invalid-feedback">
@@ -65,17 +65,17 @@
                             <!-- thumbnail -->
                             <div class="form-group">
                                 <label for="input_post_thumbnail" class="font-weight-bold">
-                                    {{ trans('posts.form_control.input.thumbnail.label') }}
+                                    {{ trans('shops.form_control.input.thumbnail.label') }}
                                 </label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                     <button id="button_post_thumbnail" data-input="input_post_thumbnail"
                                         class="btn btn-primary" type="button">
-                                        {{ trans('posts.button.browse.value') }}
+                                        {{ trans('shops.button.browse.value') }}
                                     </button>
                                     </div>
                                     <input id="input_post_thumbnail" name="thumbnail" value="{{ old('thumbnail') }}" type="text" class="form-control @error ('thumbnail') is-invalid @enderror()"
-                                    placeholder="{{ trans('posts.form_control.input.thumbnail.placeholder') }}" readonly />
+                                    placeholder="{{ trans('shops.form_control.input.thumbnail.placeholder') }}" readonly />
                                     @error('thumbnail')
                                         <span class="invalid-feedback">
                                             <strong>
@@ -88,9 +88,9 @@
                             <!-- description -->
                             <div class="form-group">
                                 <label for="input_post_description" class="font-weight-bold">
-                                    {{ trans('posts.form_control.textarea.description.label') }}
+                                    {{ trans('shops.form_control.textarea.description.label') }}
                                 </label>
-                                <textarea id="input_post_description" name="description" placeholder="{{ trans('posts.form_control.textarea.description.placeholder') }}" class="form-control @error ('description') is-invalid @enderror()" rows="3">{{ old('description') }}</textarea>
+                                <textarea id="input_post_description" name="description" placeholder="{{ trans('shops.form_control.textarea.description.placeholder') }}" class="form-control @error ('description') is-invalid @enderror()" rows="3">{{ old('description') }}</textarea>
                                 @error('description')
                                     <span class="invalid-feedback">
                                         <strong>
@@ -102,9 +102,9 @@
                             <!-- content -->
                             <div class="form-group">
                                 <label for="input_post_content" class="font-weight-bold">
-                                    {{ trans('posts.form_control.textarea.content.label') }}
+                                    {{ trans('shops.form_control.textarea.content.label') }}
                                 </label>
-                                <textarea id="input_post_content" name="content" placeholder="{{ trans('posts.form_control.textarea.content.placeholder') }}" class="form-control @error ('content') is-invalid @enderror()"
+                                <textarea id="input_post_content" name="content" placeholder="{{ trans('shops.form_control.textarea.content.placeholder') }}" class="form-control @error ('content') is-invalid @enderror()"
                                     rows="20">{{ old('content') }}</textarea>
                                 @error('content')
                                     <span class="invalid-feedback">
@@ -119,7 +119,7 @@
                             <!-- catgeory -->
                             <div class="form-group">
                                 <label for="input_post_category" class="font-weight-bold">
-                                    {{ trans('posts.form_control.input.category.label') }}
+                                    {{ trans('shops.form_control.input.category.label') }}
                                 </label>
                                 <div class="form-control overflow-auto @error ('category') is-invalid @enderror()" style="height: 886px">
                                     <!-- List category -->
@@ -144,9 +144,9 @@
                             <!-- tag -->
                             <div class="form-group">
                                 <label for="select_post_tag" class="font-weight-bold">
-                                    {{ trans('posts.form_control.select.tag.label') }}
+                                    {{ trans('shops.form_control.select.tag.label') }}
                                 </label>
-                                <select id="select_post_tag" name="tag[]" data-placeholder="{{ trans('posts.form_control.select.tag.placeholder') }}" class="custom-select w-100 @error ('tag') is-invalid @enderror()"
+                                <select id="select_post_tag" name="tag[]" data-placeholder="{{ trans('shops.form_control.select.tag.placeholder') }}" class="custom-select w-100 @error ('tag') is-invalid @enderror()"
                                     multiple>
                                     @if (old('tag'))
                                         @foreach (old('tag') as $mark)
@@ -165,7 +165,7 @@
                             <!-- status -->
                             <div class="form-group">
                                 <label for="select_post_status" class="font-weight-bold">
-                                    {{ trans('posts.form_control.select.status.label') }}
+                                    {{ trans('shops.form_control.select.status.label') }}
                                 </label>
                                 <select id="select_post_status" name="status" class="custom-select @error ('status') is-invalid @enderror()">
                                     @foreach ($statuses as $key => $value)
@@ -185,9 +185,9 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="float-right">
-                                    <a class="btn btn-warning px-4" href="{{ route('posts.index') }}">{{ trans('posts.button.back.value') }}</a>
+                                    <a class="btn btn-warning px-4" href="{{ route('shops.index') }}">{{ trans('shops.button.back.value') }}</a>
                                     <button type="submit" class="btn btn-primary px-4">
-                                        {{ trans('posts.button.save.value') }}
+                                        {{ trans('shops.button.save.value') }}
                                     </button>
                                 </div>
                             </div>

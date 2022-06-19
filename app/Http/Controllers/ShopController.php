@@ -91,15 +91,15 @@ class ShopController extends Controller
             $shop->kategori()->attach($request->category);
 
             Alert::success(
-                trans('posts.alert.create.title'),
-                trans('posts.alert.create.message.success')
+                trans('shops.alert.create.title'),
+                trans('shops.alert.create.message.success')
             );
             return redirect()->route('shops.index');
         } catch (\Throwable $th) {
             DB::rollBack();
             Alert::error(
-                trans('posts.alert.create.title'),
-                trans('posts.alert.create.message.error',['error' => $th->getMessage()])
+                trans('shops.alert.create.title'),
+                trans('shops.alert.create.message.error',['error' => $th->getMessage()])
             );
             if($request['tag']){
                 $request['tag'] = Mark::select('id','title')->whereIn('id', $request->tag)->get();
@@ -184,15 +184,15 @@ class ShopController extends Controller
             $shop->kategori()->sync($request->category);
 
             Alert::success(
-                trans('posts.alert.update.title'),
-                trans('posts.alert.update.message.success')
+                trans('shops.alert.update.title'),
+                trans('shops.alert.update.message.success')
             );
             return redirect()->route('shops.index');
         } catch (\Throwable $th) {
             DB::rollBack();
             Alert::error(
-                trans('posts.alert.update.title'),
-                trans('posts.alert.update.message.error',['error' => $th->getMessage()])
+                trans('shops.alert.update.title'),
+                trans('shops.alert.update.message.error',['error' => $th->getMessage()])
             );
             if($request['tag']){
                 $request['tag'] = Mark::select('id','title')->whereIn('id', $request->tag)->get();
@@ -218,15 +218,15 @@ class ShopController extends Controller
             $shop->delete();
             
             Alert::success(
-                trans('posts.alert.delete.title'),
-                trans('posts.alert.delete.message.success')
+                trans('shops.alert.delete.title'),
+                trans('shops.alert.delete.message.success')
             );
             return redirect()->route('shops.index');
         } catch (\Throwable $th) {
             DB::rollBack();
             Alert::error(
-                trans('posts.alert.delete.title'),
-                trans('posts.alert.delete.message.error',['error' => $th->getMessage()])
+                trans('shops.alert.delete.title'),
+                trans('shops.alert.delete.message.error',['error' => $th->getMessage()])
             );
         } finally {
             DB::commit();
@@ -237,22 +237,22 @@ class ShopController extends Controller
     private function statuses()
     {
         return [
-            'draft' => trans('posts.form_control.select.status.option.draft'),
-            'publish' => trans('posts.form_control.select.status.option.publish')
+            'draft' => trans('shops.form_control.select.status.option.draft'),
+            'publish' => trans('shops.form_control.select.status.option.publish')
         ];
     }
 
     private function attributes()
     {
         return [
-            'title' => trans('posts.form_control.input.title.attribute'),
-            'slug' => trans('posts.form_control.input.slug.attribute'),
-            'thumbnail' => trans('posts.form_control.input.thumbnail.attribute'),
-            'description' => trans('posts.form_control.textarea.description.attribute'),
-            'content' => trans('posts.form_control.textarea.content.attribute'),
-            'category' => trans('posts.form_control.input.category.attribute'),
-            'tag' => trans('posts.form_control.select.tag.attribute'),
-            'status' => trans('posts.form_control.select.status.attribute')
+            'title' => trans('shops.form_control.input.title.attribute'),
+            'slug' => trans('shops.form_control.input.slug.attribute'),
+            'thumbnail' => trans('shops.form_control.input.thumbnail.attribute'),
+            'description' => trans('shops.form_control.textarea.description.attribute'),
+            'content' => trans('shops.form_control.textarea.content.attribute'),
+            'category' => trans('shops.form_control.input.category.attribute'),
+            'tag' => trans('shops.form_control.select.tag.attribute'),
+            'status' => trans('shops.form_control.select.status.attribute')
         ];
     }
 }

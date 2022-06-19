@@ -1,7 +1,7 @@
 @extends('layouts.dashboard')
 
 @section('title')
-    {{ trans('posts.title.detail') }}
+    {{ trans('shops.title.detail') }}
 @endsection
 
 @section('content')
@@ -12,11 +12,11 @@
             <div class="container-fluid">
                 <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1>{{ trans('posts.title.detail') }}</h1>
+                    <h1>{{ trans('shops.title.detail') }}</h1>
                 </div>
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item">{{ Breadcrumbs::render('detail_post', $shop) }}</li>
+                        <li class="breadcrumb-item">{{ Breadcrumbs::render('shops_detail', $shop) }}</li>
                     </ol>
                 </div>
                 </div>
@@ -65,7 +65,7 @@
                     @endforeach
                     <div class="d-flex justify-content-end">
                         <a href="{{ route('shops.index') }}" class="btn btn-primary mx-1" role="button">
-                        {{ trans('posts.button.back.value') }}
+                        {{ trans('shops.button.back.value') }}
                         </a>
                     </div>
                 </div>

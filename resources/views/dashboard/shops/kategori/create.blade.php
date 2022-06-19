@@ -16,7 +16,7 @@
                </div>
                <div class="col-sm-6">
                   <ol class="breadcrumb float-sm-right">
-                     {{-- <li class="breadcrumb-item">{{Breadcrumbs::render('add_category')}}</li> --}}
+                     <li class="breadcrumb-item">{{Breadcrumbs::render('kategori_add')}}</li>
                   </ol>
                </div>
                </div>
