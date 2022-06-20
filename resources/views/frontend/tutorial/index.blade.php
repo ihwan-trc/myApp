@@ -53,7 +53,7 @@
             <ul>
             <li><a class="nav-link scrollto active" href="{{ route('gheptech.home') }}">Home</a></li>
             <li><a class="nav-link scrollto" href="{{ route('product.index') }}">Shop</a></li>
-            <li><a class="nav-link scrollto" href="tutorial.html">Tutorial</a></li>
+            <li><a class="nav-link scrollto" href="{{ route('tutorial.index') }}">Tutorial</a></li>
             <li class="dropdown"><a href="#services"><span>Layanan</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
                 <li><a href="#">Website <span class="badge bg-danger">HOT</span></a></li>
@@ -117,9 +117,9 @@
                     </div>
                     <div class="col-lg-8">
                         @foreach ($tutorials as $tutorial)
-                            <li>
-                                {{ $tutorial->title }}
-                            </li>
+                            <h5>
+                                <a href="/tutorial/{{ $tutorial->id }}">{{ $tutorial->title }}</a>
+                            </h5>
                             <p>
                                 {{ $tutorial->excerpt }}
                             </p>

@@ -15,8 +15,8 @@ class TutorialController extends Controller
     public function index()
     {
         return view('frontend.tutorial.index',[
-            "title" => 'Tutorial',
-            "tutorials" => Tutorial::all()
+            'title' => "Tutorial",
+            'tutorials' => Tutorial::all()
         ]);
     }
 

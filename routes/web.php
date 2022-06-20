@@ -22,6 +22,8 @@ Route::get('/gheptech', [\App\Http\Controllers\GheptechController::class, 'home'
 
 Route::get('/product', [\App\Http\Controllers\ProductController::class, 'index'])->name('product.index');
 Route::get('/product/{slug}', [\App\Http\Controllers\ProductController::class, 'showProductDetail'])->name('product.detail');
+//Tutorial
+Route::get('/tutorial', [\App\Http\Controllers\TutorialController::class, 'index'])->name('tutorial.index');
 
 Route::get('/categories', [\App\Http\Controllers\BlogController::class, 'showCategories'])->name('blog.categories');
 Route::get('/tags', [\App\Http\Controllers\BlogController::class, 'showTags'])->name('blog.tags');
@@ -46,8 +48,7 @@ Route::group(['prefix' => 'dashboard','middleware' => ['web','auth']],function()
     Route::resource('/mark', \App\Http\Controllers\MarkController::class)->except(['show']);
     //Shops
     Route::resource('/shops', \App\Http\Controllers\ShopController::class);
-    //Tutorial
-    Route::resource('/tutorial', \App\Http\Controllers\TutorialController::class);
+    
 
 
 
