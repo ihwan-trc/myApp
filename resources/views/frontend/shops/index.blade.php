@@ -124,17 +124,42 @@
                         </div>
                     </div>
                     <div class="col-lg-8">
+                        @if ($shops->count())
                         <div class="card mb-3">
-                            <img src="https://source.unsplash.com/1200x400/?website" class="card-img-top" alt="...">
+                            @if (file_exists(public_path($shops[0]->thumbnail)))
+                                <img src="{{ asset($shops[0]->thumbnail) }}" class="card-img-top" height="400" width="1200" alt="{{ $shops[0]->title }}">
+                            @else
+                                <img src="https://source.unsplash.com/1200x400?website" class="card-img-top" alt="{{ $shops[0]->title }}">
+                            @endif
                             <div class="card-body text-center">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <button type="button" class="btn btn-primary btn-sm">Rp 145.000</button>
+                                <h5 class="card-title">
+                                    <a href="/product/{{ $shops[0]->slug }}" class="text-decortation-none text-dark">{{ $shops[0]->title }}</a>
+                                    </h5>
+                                <p>
+                                    <small class="text-muted">
+                                        By. <a href="">super admin</a> in 
+                                        @foreach ($kategori as $item)
+                                        <a href="/kategori/{{ $item->title }}">
+                                            {{ $item->title }}
+                                        </a>
+                                        @endforeach
+                                        {{ $shops[0]->created_at->diffForHumans() }}
+                                    </small>
+                                </p>
+                                <p class="card-text">{{ $shops[0]->description }}</p>
+                                <a href="/product/{{ $shops[0]->slug }}"  class="btn btn-info btn-sm text-white">
+                                    {{ trans('blog.button.read_more.value') }}
+                                </a>
+                                <button type="button" class="btn btn-primary btn-sm">Demo</button>
                             </div>
                         </div>
+                        @else
+                        <p class="text-center fs-4">No product found.</p>
+                        @endif
+                        
                         <div class="row">
-                            @forelse ($shops as $product)
-                            <div class="col-lg-4 mb-3" data-aos="zoom-in" data-aos-delay="100">
+                            @forelse ($shops->skip(1) as $product)
+                            <div class="col-mb-4 mb-3" data-aos="zoom-in" data-aos-delay="100">
                                 <div class="icon-box">
                                     @if (file_exists(public_path($product->thumbnail)))
                                         <img class="img-fluid" src="{{ asset($product->thumbnail) }}" alt="{{ $product->title }}">
@@ -143,14 +168,14 @@
                                     @endif
                                     <h4><a href="">{{ $product->title }}</a></h4>
                                     <p>{{ $product->description }}</p>
-                                    <button type="button" class="btn btn-primary btn-sm">Rp 145.000</button>
                                     <a href="{{ route('product.detail',['slug' => $product->slug]) }}" class="btn btn-info btn-sm text-white">
                                         {{ trans('blog.button.read_more.value') }}
                                     </a>
+                                    <button type="button" class="btn btn-primary btn-sm">Demo</button>
                                 </div>
                             </div>
                             @empty
-                                <h3 class="text-center">
+                                <h3 class="text-center fs-4">
                                     {{ trans('blog.no_data.posts') }}
                                 </h3>
                             @endforelse

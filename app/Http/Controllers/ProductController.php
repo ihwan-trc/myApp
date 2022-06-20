@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Shop;
+use App\Models\User;
 use App\Models\Kategori;
 use App\Models\Mark;
 use Laravel\Ui\Presets\React;
@@ -16,6 +17,7 @@ class ProductController extends Controller
         return view('frontend.shops.index',[
             'kategori' => Kategori::with('descendants')->onlyParent()->get(),
             'shops' => Shop::publish()->latest()->paginate($this->perPage),
+            'users' => User::get()->all(),
         ]);
     }
 
