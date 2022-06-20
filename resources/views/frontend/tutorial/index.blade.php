@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <title>{{ config('app.name') }} - Shop</title>
+    <title>{{ config('app.name') }} - Tutorial</title>
 
     <!-- Favicons -->
     <link href="{{ asset('vendor/gheptech/img/new-icon.ico') }}" rel="icon">
@@ -53,7 +53,7 @@
             <ul>
             <li><a class="nav-link scrollto active" href="{{ route('gheptech.home') }}">Home</a></li>
             <li><a class="nav-link scrollto" href="{{ route('product.index') }}">Shop</a></li>
-            <li><a class="nav-link scrollto" href="{{ route('tutorial.index') }}">Tutorial</a></li>
+            <li><a class="nav-link scrollto" href="tutorial.html">Tutorial</a></li>
             <li class="dropdown"><a href="#services"><span>Layanan</span> <i class="bi bi-chevron-down"></i></a>
                 <ul>
                 <li><a href="#">Website <span class="badge bg-danger">HOT</span></a></li>
@@ -78,7 +78,7 @@
             <div class="container">
                 <div class="row d-flex">
                     <ol class="col-lg-8">
-                        <li>{{ Breadcrumbs::render('shops') }}</li>
+                        {{-- <li>{{ Breadcrumbs::render('shops') }}</li> --}}
                     </ol>
                     <div class="col-lg-4">
                         <input class="form-control"  placeholder="search product...">
@@ -94,15 +94,13 @@
                 <div class="row">
                     <div class="col-lg-4">
                         <div class="portfolio-info">
-                            <h3>KATEGORI PRODUK</h3>
+                            <h3>KATEGORI</h3>
                             <ul class="list-group">
-                                @include('frontend.shops._kategori-list',[
-                                        'categories' => $kategori
-                                    ])
+                                
                             </ul>
                         </div>
                         <div class="portfolio-info">
-                            <h3>PALING LARIS</h3>
+                            <h3>Tag</h3>
                             <div class="d-flex">
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <span class="badge bg-primary">Rp 120.000</span></p>
                                 <img src="https://source.unsplash.com/300x300/?e-book javascript" class="card-img-top" alt="..." style="width: 80px; height: 70px;">
@@ -115,84 +113,20 @@
                                 <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. <span class="badge bg-primary">Rp 120.000</span></p>
                                 <img src="https://source.unsplash.com/300x300/?e-book javascript" class="card-img-top" alt="..." style="width: 80px; height: 70px;">
                             </div>
-                        </div>
-                        <div class="portfolio-info">
-                            <h3>PROMO</h3>
-                            <ul>
-                                <li><img src="https://source.unsplash.com/311x400/?e-book javascript" class="card-img-top" alt="..."></li>
-                            </ul>
                         </div>
                     </div>
                     <div class="col-lg-8">
-                        @if ($shops->count())
-                        <div class="card mb-3">
-                            @if (file_exists(public_path($shops[0]->thumbnail)))
-                                <img src="{{ asset($shops[0]->thumbnail) }}" class="card-img-top" height="400" width="1200" alt="{{ $shops[0]->title }}">
-                            @else
-                                <img src="https://source.unsplash.com/1200x400?website" class="card-img-top" alt="{{ $shops[0]->title }}">
-                            @endif
-                            <div class="card-body text-center">
-                                <h5 class="card-title">
-                                    <a href="/product/{{ $shops[0]->slug }}" class="text-decortation-none text-dark">{{ $shops[0]->title }}</a>
-                                </h5>
-                                <p>
-                                    <small class="text-muted">
-                                        By. <a href="">super admin</a> in 
-                                        @foreach ($kategori as $item)
-                                        <a href="/kategori/{{ $item->title }}">
-                                            {{ $item->title }}
-                                        </a>
-                                        @endforeach
-                                        {{ $shops[0]->created_at->diffForHumans() }}
-                                    </small>
-                                </p>
-                                <p class="card-text">{{ $shops[0]->description }}</p>
-                                <a href="/product/{{ $shops[0]->slug }}"  class="btn btn-info btn-sm text-white">
-                                    {{ trans('blog.button.read_more.value') }}
-                                </a>
-                                <button type="button" class="btn btn-primary btn-sm">Demo</button>
-                            </div>
-                        </div>
-                        @else
-                        <p class="text-center fs-4">No product found.</p>
-                        @endif
-                        
-                        <div class="row">
-                            @forelse ($shops->skip(1) as $product)
-                            <div class="col-lg-4 mb-3" data-aos="zoom-in" data-aos-delay="100">
-                                <div class="icon-box">
-                                    @if (file_exists(public_path($product->thumbnail)))
-                                        <img class="img-fluid" src="{{ asset($product->thumbnail) }}" alt="{{ $product->title }}">
-                                    @else
-                                        <img class="img-fluid rounded" src="https://placehold.co/600x400" alt="{{ $product->title }}">
-                                    @endif
-                                    <h6 class="card-title text-center">
-                                        <a href="" class="text-decortation-none text-dark">{{ $product->title }}</a>
-                                    </h6>
-                                    <p>
-                                        <small class="text-muted">
-                                            By. <a href="">super admin</a> in 
-                                            @foreach ($kategori as $item)
-                                            <a href="/kategori/{{ $item->title }}">
-                                                {{ $item->title }}
-                                            </a>
-                                            @endforeach
-                                            {{ $shops[0]->created_at->diffForHumans() }}
-                                        </small>
-                                    </p>
-                                    <p>{{ $product->description }}</p>
-                                    <a href="{{ route('product.detail',['slug' => $product->slug]) }}" class="btn btn-info btn-sm text-white">
-                                        {{ trans('blog.button.read_more.value') }}
-                                    </a>
-                                    <button type="button" class="btn btn-primary btn-sm">Demo</button>
-                                </div>
-                            </div>
-                            @empty
-                                <h3 class="text-center fs-4">
-                                    {{ trans('blog.no_data.posts') }}
-                                </h3>
-                            @endforelse
-                        </div>
+                        @foreach ($tutorials as $tutorial)
+                            <li>
+                                {{ $tutorial->title }}
+                            </li>
+                            <p>
+                                {{ $tutorial->excerpt }}
+                            </p>
+                            <p>
+                                {{ $tutorial->body }}
+                            </p>
+                        @endforeach
                     </div>
                 </div>
             </div>
@@ -275,10 +209,6 @@
             &copy; Copyright <strong><span>Gheptech 2022</span></strong>. All Rights Reserved
         </div>
         <div class="credits">
-            <!-- All the links in the footer should remain intact. -->
-            <!-- You can delete the links only if you purchased the pro version. -->
-            <!-- Licensing information: https://bootstrapmade.com/license/ -->
-            <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/arsha-free-bootstrap-html-template-corporate/ -->
             Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
         </div>
         </div>

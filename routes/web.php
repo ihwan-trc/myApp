@@ -46,6 +46,9 @@ Route::group(['prefix' => 'dashboard','middleware' => ['web','auth']],function()
     Route::resource('/mark', \App\Http\Controllers\MarkController::class)->except(['show']);
     //Shops
     Route::resource('/shops', \App\Http\Controllers\ShopController::class);
+    //Tutorial
+    Route::resource('/tutorial', \App\Http\Controllers\TutorialController::class);
+
 
 
 
