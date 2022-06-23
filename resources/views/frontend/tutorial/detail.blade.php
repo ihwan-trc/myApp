@@ -116,16 +116,15 @@
                         </div>
                     </div>
                     <div class="col-lg-8">
-                        @foreach ($tutorials as $tutorial)
-                        <article>
                             <h5>
                                 <a href="/tutorial/{{ $tutorial->slug }}">{{ $tutorial->title }}</a>
                             </h5>
                             <p>
                                 {{ $tutorial->excerpt }}
                             </p>
-                        </article>
-                        @endforeach
+                            <p>
+                                {!! $tutorial->body !!}
+                            </p>
                     </div>
                 </div>
             </div>

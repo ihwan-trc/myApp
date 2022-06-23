@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateTutorialsTable extends Migration
+class CreateCategoryTutorialsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,10 @@ class CreateTutorialsTable extends Migration
      */
     public function up()
     {
-        Schema::create('tutorials', function (Blueprint $table) {
+        Schema::create('category_tutorials', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id');
-            $table->string('title');
+            $table->string('name')->unique();
             $table->string('slug')->unique();
-            $table->text('excerpt');
-            $table->text('body');
-            $table->timestamp('published_at')->nullable();
             $table->timestamps();
         });
     }
@@ -32,6 +28,6 @@ class CreateTutorialsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('tutorials');
+        Schema::dropIfExists('category_tutorials');
     }
 }

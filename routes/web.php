@@ -24,6 +24,7 @@ Route::get('/product', [\App\Http\Controllers\ProductController::class, 'index']
 Route::get('/product/{slug}', [\App\Http\Controllers\ProductController::class, 'showProductDetail'])->name('product.detail');
 //Tutorial
 Route::get('/tutorial', [\App\Http\Controllers\TutorialController::class, 'index'])->name('tutorial.index');
+Route::get('/tutorial/{tutorial:slug}', [\App\Http\Controllers\TutorialController::class, 'show']);
 
 Route::get('/categories', [\App\Http\Controllers\BlogController::class, 'showCategories'])->name('blog.categories');
 Route::get('/tags', [\App\Http\Controllers\BlogController::class, 'showTags'])->name('blog.tags');
